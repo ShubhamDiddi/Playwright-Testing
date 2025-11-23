@@ -11,8 +11,10 @@ test('test', async ({ page }) => {
     await page.locator('div').filter({ hasText: 'AMS' }).nth(4).click();
     await page.getByRole('menuitem', { name: 'Admin' }).click();
     await page.getByRole('menuitem', { name: 'Audit Masters' }).click();
+    // ---------------------- CREATE AREAS ----------------------
     await page.getByRole('menuitem', { name: 'Area', exact: true }).click();
     await page.getByRole('menuitem', { name: 'Create' }).click();
+    await page.getByRole('combobox', { name: 'Organization' }).click();
     await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('textbox', { name: 'Area' }).fill('C1_CCSA_BA1');
     await page.getByRole('combobox', { name: 'Status' }).click();
@@ -420,13 +422,13 @@ test('test', async ({ page }) => {
     await page.getByRole('menuitem', { name: 'Audit Type' }).click();
     await page.getByRole('menuitem', { name: 'View List' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company 1' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     // -------------Map Audit Type to Area-----------------    
     await page.getByRole('menuitem', { name: 'Admin' }).click();
     await page.getByRole('menuitem', { name: 'Audit Type' }).click();
     await page.getByRole('menuitem', { name: 'Map AuditType To Area' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company 1' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('combobox').nth(1).click();
     await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
     await page.getByRole('checkbox', { name: 'Mumbai Ho' }).check();
@@ -437,7 +439,7 @@ test('test', async ({ page }) => {
     await page.getByRole('button', { name: 'move selected left' }).nth(1).click();
     await page.getByRole('button', { name: 'Map' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company 1' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('combobox').nth(1).click();
     await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
     await page.getByRole('checkbox', { name: 'Pune Branch' }).check();
@@ -451,7 +453,7 @@ test('test', async ({ page }) => {
     await page.getByRole('menuitem', { name: 'Workflow', exact: true }).click();
     await page.getByRole('menuitem', { name: 'Create' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.locator('#mui-component-select-auditTypeId').click();
     await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
     await page.getByRole('textbox', { name: 'Workflow Name' }).click();
@@ -473,7 +475,7 @@ test('test', async ({ page }) => {
     await page.getByRole('menuitem', { name: 'Workflow Stages' }).click();
     await page.getByRole('menuitem', { name: 'Create' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByLabel('', { exact: true }).click();
     await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
     await page.getByRole('textbox', { name: 'Workflow Stage Name' }).click();
@@ -519,7 +521,7 @@ test('test', async ({ page }) => {
     // -------------Assign Workflow-----------------
     await page.getByRole('link', { name: 'Assign Sequence to Workflow' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('combobox', { name: 'Stage Workflow' }).click();
     await page.getByRole('option', { name: 'Basic (C1ConcurrentSimpleWF)' }).click();
     await page.getByRole('option', { name: 'Basic (C1ConcurrentSimpleWF)' }).click();
@@ -566,7 +568,7 @@ test('test', async ({ page }) => {
     // -------------Manage Workflow Access-----------------
     await page.getByRole('link', { name: 'Manage Workflow Access' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('combobox', { name: 'Audit Type' }).click();
     await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
     await page.getByRole('combobox', { name: 'Role' }).click();
@@ -645,7 +647,7 @@ test('test', async ({ page }) => {
     // -------------Define Workflow-----------------
     await page.getByRole('link', { name: 'Define Workflow' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('combobox', { name: 'Audit Type' }).click();
     await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
     await page.getByRole('combobox', { name: 'Workflow Stages' }).first().click();

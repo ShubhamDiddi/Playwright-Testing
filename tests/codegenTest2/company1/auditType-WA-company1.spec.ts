@@ -13,6 +13,7 @@ test('test', async ({ page }) => {
     // ---------------------- CREATE AREAS ----------------------
     await page.getByRole('menuitem', { name: 'Area', exact: true }).click();
     await page.getByRole('menuitem', { name: 'Create' }).click();
+    await page.getByRole('combobox', { name: 'Organization' }).click();
     await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('textbox', { name: 'Area' }).fill('C1_CCWA_BA1');
     await page.getByRole('combobox', { name: 'Status' }).click();

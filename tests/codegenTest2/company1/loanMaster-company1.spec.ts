@@ -14,7 +14,7 @@ test('test', async ({ page }) => {
     await page.getByRole('menuitem', { name: 'Loan Type' }).click();
     await page.getByRole('menuitem', { name: 'Create', exact: true }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company 1' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('textbox', { name: 'Loan Type' }).fill('C1_LT1');
     await page.getByRole('combobox', { name: 'Loan Status' }).click();
     await page.getByRole('option', { name: 'Active' }).click();
@@ -27,7 +27,7 @@ test('test', async ({ page }) => {
     await page.getByRole('menuitem', { name: 'Loan Subtype' }).click();
     await page.getByRole('menuitem', { name: 'Create' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company 1' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('combobox', { name: 'Select Loan Type' }).click();
     await page.getByRole('option', { name: 'C1_LT1' }).click();
     await page.getByRole('textbox', { name: 'Loan Sub Type' }).fill('C1_LT1_ST1');
@@ -50,7 +50,7 @@ test('test', async ({ page }) => {
     await page.getByRole('menuitem', { name: 'Loan Question' }).click();
     await page.getByRole('menuitem', { name: 'Create' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company 1' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('combobox', { name: 'Loan Type' }).click();
     await page.getByRole('option', { name: 'C1_LT1' }).click();
     await page.getByRole('combobox', { name: 'Loan Sub Type' }).click();
@@ -111,7 +111,7 @@ test('test', async ({ page }) => {
     await page.getByRole('menuitem', { name: 'Loan Document' }).click();
     await page.getByRole('menuitem', { name: 'Create' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company 1' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('combobox', { name: 'Loan Type' }).click();
     await page.getByRole('option', { name: 'C1_LT1' }).click();
     await page.getByRole('combobox', { name: 'Loan Sub Type' }).click();
@@ -183,7 +183,7 @@ test('test', async ({ page }) => {
     await page.getByRole('menuitem', { name: 'Loan Masters' }).click();
     await page.getByRole('menuitem', { name: 'Map AuditType To LoanType' }).click();
     await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company 1' }).click();
+    await page.getByRole('option', { name: 'Company1' }).click();
     await page.getByRole('combobox', { name: 'Select Audit Type' }).click();
     await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
     await page.getByRole('combobox', { name: 'Select Loantype' }).click();
