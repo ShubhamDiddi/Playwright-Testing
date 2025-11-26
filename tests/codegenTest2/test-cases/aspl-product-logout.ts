@@ -1,78 +1,47 @@
 import { test, expect } from "@playwright/test";
 
-test("ASPL Page", async ({ page }) => {
+test("ASPL - Check logout Scenario", async ({ page }) => {
+
+  // Login page
   await page.goto(
-    "http://localhost:8080/realms/aspl-realm/protocol/openid-connect/auth?response_type=code&client_id=aspl-open-id&redirect_uri=http%3A%2F%2Flocalhost%3A3000&code_challenge=50YiQ-drtThl3xA2StcjuE0QoC-u47YR076scb0tJsk&code_challenge_method=S256&scope=profile+openid&state=customLoginState"
+    "http://localhost:8080/realms/aspl-realm/protocol/openid-connect/auth?response_type=code&client_id=aspl-open-id&redirect_uri=http://localhost:3000&scope=openid"
   );
-  await page.pause();
-  await page.getByRole("textbox", { name: "Username or email" }).click();
-  await page
-    .getByRole("textbox", { name: "Username or email" })
-    .fill("c1admin");
-  await page.getByRole("textbox", { name: "Password" }).click();
+
+  // Login
+  await page.getByRole("textbox", { name: "Username or email" }).fill("c1companyadmin");
   await page.getByRole("textbox", { name: "Password" }).fill("12345");
   await page.getByRole("button", { name: "Sign In" }).click();
 
-  //Check element Visible/Hidden
-  await expect(
-    page.locator("div").filter({ hasText: "AMS" }).nth(4)
-  ).toBeVisible();
+  // Wait for dashboard
+  await page.waitForSelector("text=AMS");
 
-  await page.locator("div").filter({ hasText: "AMS" }).nth(4).click();
+  // Open account settings
+  await page.getByRole('button', { name: 'Account settings' }).click();
+  await page.getByRole('menuitem', { name: 'Organization Company' }).locator('label').click();
+  await page.getByRole('menuitem', { name: 'Location Mumbai Ho' }).locator('label').click();
+  await page.getByRole('menuitem', { name: 'Username c1companyadmin' }).locator('label').click();
+  await page.getByRole('menuitem', { name: 'Roles C1OrgAdmin' }).locator('label').click();
 
-    await page.getByRole("menuitem", { name: "Audit" }).click();
-    await page.getByRole("menuitem", { name: "List View" }).click();
-    await page.getByRole("combobox", { name: "Location" }).click();
+  // Check disabled fields (positive test)
+  await expect(page.locator('input[name="organization"]')).toBeDisabled();
+  await expect(page.locator('input[name="location"]')).toBeDisabled();
+  await expect(page.locator('input[name="username"]')).toBeDisabled();
+  await expect(page.locator('input[name="roles"]')).toBeDisabled();
 
-//   Assert specific option is visible inside the list
-    await expect(page.getByRole("option", { name: "Pune Branch" })).toBeVisible();
+  // Negative test: try typing in disabled fields (should not work)
+  const orgInput = page.locator('input[name="organization"]');
+  const locInput = page.locator('input[name="location"]');
+  const userInput = page.locator('input[name="username"]');
+  const roleInput = page.locator('input[name="roles"]');
 
-    await page.getByRole("option", { name: "Pune Branch" }).click();
-    await expect(page.locator('div').filter({ hasText: 'AMS' }).nth(4)).toBeHidden()
-  await page.getByRole("menuitem", { name: "Admin" }).click();
-  await page.getByRole("menuitem", { name: "Audit Masters" }).click();
-  await page.getByRole("menuitem", { name: "Document" }).click();
-  await page.getByRole("menuitem", { name: "Create" }).click();
+  expect(await orgInput.isEditable()).toBe(false);
+  expect(await locInput.isEditable()).toBe(false);
+  expect(await userInput.isEditable()).toBe(false);
+  expect(await roleInput.isEditable()).toBe(false);
 
-  const areaCombobox = page.getByRole("combobox", {
-    name: "Area",
-    exact: true,
-  });
+  // Logout
+  await page.getByRole('button', { name: 'Logout' }).click();
 
-  //Audit level document yes or no radio
-  // -------------------------------
-  // Select YES → Check combobox is DISABLED
-  // -------------------------------
-  await page.getByRole("radio", { name: "Yes" }).check();
-
-  await expect(areaCombobox).toBeDisabled(); // Assertion
-
-  // -------------------------------
-  // Select NO → Check combobox is ENABLED
-  // -------------------------------
-  await page.getByRole("radio", { name: "No" }).check();
-
-  await expect(areaCombobox).toBeEnabled(); // Assertion
-
-  // If enabled, select an option
-  await areaCombobox.click();
-  await page.getByRole("option", { name: "C1_CCSA_BA1" }).click();
-  await page.getByRole("combobox", { name: "Subarea" }).click();
-  await page.getByRole("option", { name: "C1_CCSA_BA1_SA2" }).click();
-  await page.getByRole("combobox", { name: "Question" }).click();
-  await page.getByRole("option", { name: "C1_CCSA_BA1_SA2 QUESTION" }).click();
-  await page.getByRole("textbox", { name: "Document Name" }).click();
-  await page.getByRole("textbox", { name: "Document Name" }).fill("C1_CCSA_BA1_SA2 Document1");
-  await page.getByRole("combobox", { name: "Category" }).click();
-  await page.getByRole("option", { name: "AUDITEE" }).click();
-  await page.getByRole("combobox", { name: "Document Type" }).click();
-  await page.getByRole("option", { name: "Supporting" }).click();
-  await page.getByRole("combobox", { name: "Status" }).click();
-  await page.getByRole("option", { name: "Active", exact: true }).click();
-  await page.getByRole("button", { name: "Choose File" }).click();
-  await page
-    .getByRole("button", { name: "Choose File" })
-    .setInputFiles("Financial_Information_Template.xlsx");
-  await page.getByRole("button", { name: "Submit" }).click();
-  
+  // After logout user should return to Keycloak login page
+  await expect(page).toHaveURL(/openid-connect\/auth/);
 });
