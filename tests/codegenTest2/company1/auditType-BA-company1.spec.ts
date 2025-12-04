@@ -1,733 +1,1213 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('test', async ({ page }) => {
-
-    await page.goto('http://localhost:8080/realms/aspl-realm/protocol/openid-connect/auth?response_type=code&client_id=aspl-open-id&redirect_uri=http%3A%2F%2Flocalhost%3A3000&code_challenge=UW0Eb3jCQySRSm6IYatJ1DfOG3EhgglgD-rdEW9uM90&code_challenge_method=S256&scope=profile+openid&state=customLoginState');
-    await page.getByRole('textbox', { name: 'Username or email' }).click();
-    await page.getByRole('textbox', { name: 'Username or email' }).fill('vishalp');
-    await page.getByRole('textbox', { name: 'Password' }).click();
-    await page.getByRole('textbox', { name: 'Password' }).fill('12345');
-    await page.getByRole('button', { name: 'Sign In' }).click();
-    await page.locator('div').filter({ hasText: 'AMS' }).nth(4).click();
-    await page.getByRole('menuitem', { name: 'Admin' }).click();
-    await page.getByRole('menuitem', { name: 'Audit Masters' }).click();
-    // ---------------------- CREATE AREAS ----------------------
-    await page.getByRole('menuitem', { name: 'Area', exact: true }).click();
-    await page.getByRole('menuitem', { name: 'Create' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByRole('textbox', { name: 'Area' }).fill('C1_CCSA_BA1');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Area' }).fill('C1_CCSA_BA2');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Area' }).fill('C1_CCSA_BA3');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    // ---------------------- CREATE SUBAREAS ----------------------
-    await page.getByRole('menuitem', { name: 'Subarea' }).click();
-    await page.getByRole('menuitem', { name: 'Create' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByRole('combobox', { name: 'Area' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1' }).click();
-    await page.getByRole('textbox', { name: 'Subarea' }).fill('C1_CCSA_B1_SA1');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Area' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1' }).click();
-    await page.getByRole('textbox', { name: 'Subarea' }).fill('C1_CCSA_BA1_SA2');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Area' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA2' }).click();
-    await page.getByRole('textbox', { name: 'Subarea' }).fill('C1_CCSA_BA2_SA1');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    // CREATE QUESTIONS
-    await page.getByRole('menuitem', { name: 'Admin' }).click();
-    await page.getByRole('menuitem', { name: 'Audit Masters' }).click();
-    await page.getByRole('menuitem', { name: 'Question' }).click();
-    await page.getByRole('menuitem', { name: 'Create' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByRole('combobox', { name: 'Area', exact: true }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1' }).click();
-    await page.getByRole('combobox', { name: 'Subarea' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1_SA1' }).click();
-    await page.getByRole('textbox', { name: 'Question' }).fill('C1_CCSA_BA1_SA1 QUESTION1');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active' }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Area', exact: true }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1' }).click();
-    await page.getByRole('combobox', { name: 'Subarea' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1_SA1' }).click();
-    await page.getByRole('textbox', { name: 'Question' }).fill('C1_CCSA_BA1_SA1 QUESTION2');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active' }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Area', exact: true }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1' }).click();
-    await page.getByRole('combobox', { name: 'Subarea' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1_SA2' }).click();
-    await page.getByRole('textbox', { name: 'Question' }).fill('C1_CCSA_BA1_SA2 QUESTION');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active' }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Area', exact: true }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA2' }).click();
-    await page.getByRole('combobox', { name: 'Subarea' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA2_SA1' }).click();
-    await page.getByRole('textbox', { name: 'Question' }).fill('C1_CCSA_BA2_SA1 QUESTION');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active' }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Area', exact: true }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA3' }).click();
-    await page.getByRole('textbox', { name: 'Question' }).fill('C1_CCSA_BA3 QUESTION');
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active' }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    // CREATE DOCUMENTS
-    await page.getByRole('menuitem', { name: 'Admin' }).click();
-    await page.getByRole('menuitem', { name: 'Audit Masters' }).click();
-    await page.getByRole('menuitem', { name: 'Document' }).click();
-    await page.getByRole('menuitem', { name: 'Create' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByRole('combobox', { name: 'Area' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1' }).click();
-    await page.getByRole('combobox', { name: 'Subarea' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1_SA1' }).click();
-    await page.getByRole('combobox', { name: 'Question' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1_SA1 QUESTION1' }).click();
-    await page.getByRole('textbox', { name: 'Document Name' }).fill('C1_CCSA_AuditLevelDocument1');
-    await page.getByRole('combobox', { name: 'Category' }).click();
-    await page.getByRole('option', { name: 'AUDITOR' }).click();
-    await page.getByRole('combobox', { name: 'Document Type' }).click();
-    await page.getByRole('option', { name: 'Annexure' }).click();
-    await page.getByRole('combobox', { name: 'Status' }).click();
-    await page.getByRole('option', { name: 'Active' }).click();
-    await page.getByRole('button', { name: 'Choose File' }).setInputFiles('C1_CCSA_AuditLevelDocument1.xlsx');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Area' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1' }).click();
-    await page.getByRole('combobox', { name: 'Subarea' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1_SA1' }).click();
-    await page.getByRole('combobox', { name: 'Question' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1_SA1 QUESTION2' }).click();
-    await page.getByRole('textbox', { name: 'Document Name' }).fill('C1_CCSA_AuditorDocument1');
-    await page.getByRole('combobox', { name: 'Category' }).click();
-    await page.getByRole('option', { name: 'AUDITOR' }).click();
-    await page.getByRole('combobox', { name: 'Document Type' }).click();
-    await page.getByRole('option', { name: 'Supporting' }).click();
-    await page.getByRole('button', { name: 'Choose File' }).setInputFiles('C1_CCSA_AuditorDocument1.pdf');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Document Name' }).fill('C1_CCSA_AuditLevelDocument2');
-    await page.getByRole('combobox', { name: 'Category' }).click();
-    await page.getByRole('option', { name: 'AUDITOR' }).click();
-    await page.getByRole('combobox', { name: 'Document Type' }).click();
-    await page.getByRole('option', { name: 'Annexure' }).click();
-    await page.getByRole('button', { name: 'Choose File' }).setInputFiles('C1_CCSA_AuditLevelDocument2.xlsx');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Area' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1' }).click();
-    await page.getByRole('combobox', { name: 'Subarea' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1_SA2' }).click();
-    await page.getByRole('combobox', { name: 'Question' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA1_SA2 QUESTION' }).click();
-    await page.getByRole('textbox', { name: 'Document Name' }).fill('C1_CCSA_AuditorDocument2');
-    await page.getByRole('combobox', { name: 'Category' }).click();
-    await page.getByRole('option', { name: 'AUDITOR' }).click();
-    await page.getByRole('combobox', { name: 'Document Type' }).click();
-    await page.getByRole('option', { name: 'Supporting' }).click();
-    await page.getByRole('button', { name: 'Choose File' }).setInputFiles('C1_CCSA_AuditorDocument2.pdf');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Document Name' }).fill('C1_CCSA_AuditeeDocument1');
-    await page.getByRole('combobox', { name: 'Category' }).click();
-    await page.getByRole('option', { name: 'AUDITEE' }).click();
-    await page.getByRole('combobox', { name: 'Document Type' }).click();
-    await page.getByRole('option', { name: 'Supporting' }).click();
-    await page.getByRole('button', { name: 'Choose File' }).setInputFiles('C1_CCSA_AuditeeDocument1.pdf');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Area' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA2' }).click();
-    await page.getByRole('combobox', { name: 'Subarea' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA2_SA1' }).click();
-    await page.getByRole('combobox', { name: 'Question' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA2_SA1 QUESTION' }).click();
-    await page.getByRole('textbox', { name: 'Document Name' }).fill('C1_CCSA_AuditeeDocument2');
-    await page.getByRole('combobox', { name: 'Category' }).click();
-    await page.getByRole('option', { name: 'AUDITEE' }).click();
-    await page.getByRole('combobox', { name: 'Document Type' }).click();
-    await page.getByRole('option', { name: 'Supporting' }).click();
-    await page.getByRole('button', { name: 'Choose File' }).setInputFiles('C1_CCSA_AuditeeDocument2.pdf');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Area' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA3' }).click();
-    await page.getByRole('combobox', { name: 'Question' }).click();
-    await page.getByRole('option', { name: 'C1_CCSA_BA3 QUESTION' }).click();
-    await page.getByRole('textbox', { name: 'Document Name' }).fill('C1_CCSA_AuditorDocument3');
-    await page.getByRole('combobox', { name: 'Category' }).click();
-    await page.getByRole('option', { name: 'AUDITOR' }).click();
-    await page.getByRole('combobox', { name: 'Document Type' }).click();
-    await page.getByRole('option', { name: 'Supporting' }).click();
-    await page.getByRole('button', { name: 'Choose File' }).setInputFiles('C1_CCSA_AuditorDocument3.pdf');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Document Name' }).fill('C1_CCSA_AuditorDocument4');
-    await page.getByRole('combobox', { name: 'Category' }).click();
-    await page.getByRole('option', { name: 'AUDITOR' }).click();
-    await page.getByRole('combobox', { name: 'Document Type' }).click();
-    await page.getByRole('option', { name: 'Supporting' }).click();
-    await page.getByRole('button', { name: 'Choose File' }).setInputFiles('C1_CCSA_AuditorDocument4.pdf');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    // -------------Create Audit Type-----------------
-    await page.getByRole('menuitem', { name: 'Admin' }).click();
-    await page.getByRole('menuitem', { name: 'Audit Type' }).click();
-    await page.getByRole('menuitem', { name: 'Create' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByRole('combobox', { name: 'Select Report Type' }).first().click();
-    await page.getByRole('option', { name: 'Columnar' }).click();
-    await page.getByRole('textbox', { name: 'Select Color' }).click();
-    await page.getByRole('textbox', { name: 'Select Color' }).fill('#97f2e0');
-    await page.getByRole('textbox', { name: 'Audit Type Name' }).click();
-    await page.getByRole('textbox', { name: 'Audit Type Name' }).fill('C1 Concurrent Simple');
-    await page.getByRole('combobox', { name: 'Audit Type Status' }).click();
-    await page.getByRole('option', { name: 'ACTIVE', exact: true }).click();
-    await page.getByRole('combobox', { name: 'Audit Scoring Method' }).click();
-    await page.getByRole('option', { name: 'Basic' }).click();
-    await page.getByRole('combobox', { name: 'Loan Scoring Method' }).click();
-    await page.getByRole('option', { name: 'Basic' }).click();
-    await page.getByRole('combobox', { name: 'Frequency' }).click();
-    await page.getByRole('option', { name: 'Quarterly' }).click();
-    await page.getByRole('spinbutton', { name: 'Finding Closure Duration (in' }).click();
-    await page.getByRole('spinbutton', { name: 'Finding Closure Duration (in' }).fill('7');
-    await page.getByRole('combobox', { name: 'Select Report Type' }).nth(1).click();
-    await page.getByRole('option', { name: 'INTERNAL' }).click();
-    await page.getByRole('textbox', { name: 'Description' }).click();
-    await page.getByRole('textbox', { name: 'Description' }).fill('This is the concurrent simple audit type.');
-    await page.getByRole('radio', { name: 'No' }).check();
-    await page.getByRole('button', { name: 'Save' }).click();
-    await page.getByRole('button', { name: 'Click Next to Proceed' }).click();
-    await page.getByRole('button', { name: 'Save' }).click();
-    await page.getByRole('button', { name: 'Click Next to Proceed' }).click();
-    await page.getByRole('button', { name: 'Save' }).click();
-    await page.getByRole('button', { name: 'Click Next to Proceed' }).click();
-    await page.locator('form').getByRole('button', { name: 'Add Row' }).click();
-    await page.locator('form').getByRole('button', { name: 'Add Row' }).click();
-    await page.locator('#system-alias-select-0').click();
-    await page.getByRole('option', { name: 'Open' }).click();
-    await page.getByRole('combobox', { name: 'System Alias', exact: true }).click();
-    await page.getByRole('option', { name: 'Closed' }).click();
-    await page.getByRole('row', { name: 'System Alias Open Remove Row' }).getByRole('textbox').click();
-    await page.getByRole('row', { name: 'System Alias Open Remove Row' }).getByRole('textbox').fill('Open');
-    await page.getByRole('row', { name: 'System Alias Closed Remove Row' }).getByRole('textbox').click();
-    await page.getByRole('row', { name: 'System Alias Closed Remove Row' }).getByRole('textbox').click();
-    await page.getByRole('row', { name: 'System Alias Closed Remove Row' }).getByRole('textbox').fill('Closed');
-    await page.getByRole('button', { name: 'Add Row' }).first().click();
-    await page.getByRole('button', { name: 'Add Row' }).first().click();
-    await page.getByRole('button', { name: 'Add Row' }).first().click();
-    await page.getByRole('textbox', { name: 'Compliance' }).first().click();
-    await page.getByRole('textbox', { name: 'Compliance' }).first().fill('Yes');
-    await page.getByRole('textbox', { name: 'Compliance' }).nth(1).click();
-    await page.getByRole('textbox', { name: 'Compliance' }).nth(1).fill('Na');
-    await page.getByRole('row', { name: 'Delete Row #000000 Add Row' }).getByPlaceholder('Compliance').click();
-    await page.getByRole('row', { name: 'Delete Row #000000 Add Row' }).getByPlaceholder('Compliance').fill('No');
-    await page.getByRole('row', { name: 'Delete Row Yes #000000 Add Row' }).getByRole('emphasis').click();
-    await page.getByRole('option', { name: 'Yes' }).click();
-    await page.getByRole('row', { name: 'Delete Row Na #000000 Add Row' }).getByRole('combobox').click();
-    await page.getByRole('option', { name: 'NA' }).click();
-    await page.getByRole('row', { name: 'Delete Row No #000000 Add Row' }).getByRole('combobox').click();
-    await page.getByRole('option', { name: 'No' }).click();
-    await page.getByRole('row', { name: 'Delete Row Yes #000000 Add Row' }).getByLabel('NO').check();
-    await page.getByRole('row', { name: 'Delete Row Na #000000 Add Row' }).getByLabel('NO').check();
-    await page.getByRole('row', { name: 'Delete Row No #000000 Add Row' }).getByLabel('YES').check();
-    await page.getByRole('row', { name: 'Delete Row Yes #000000 Add Row' }).getByPlaceholder('Weightage').click();
-    await page.getByRole('row', { name: 'Delete Row Yes #000000 Add Row' }).getByPlaceholder('Weightage').fill('5');
-    await page.locator('tr:nth-child(2) > td:nth-child(6)').click();
-    await page.getByRole('row', { name: 'Delete Row Na #000000 Add Row' }).getByPlaceholder('Weightage').fill('5');
-    await page.getByRole('row', { name: 'Delete Row Yes 5 #000000 Add' }).locator('input[type="color"]').click();
-    await page.getByRole('row', { name: 'Delete Row Yes 5 #000000 Add' }).locator('input[type="color"]').fill('#70f25f');
-    await page.getByRole('cell', { name: '#' }).nth(3).click();
-    await page.getByRole('row', { name: 'Delete Row Na 5 #000000 Add' }).locator('input[type="color"]').fill('#61efb9');
-    await page.getByRole('row', { name: 'Delete Row No #000000 Add Row' }).getByLabel('Add Row').click();
-    await page.getByRole('row', { name: 'Delete Row No #000000 Add Row' }).getByLabel('Add Row').click();
-    await page.getByRole('row', { name: 'Delete Row No #000000 Add Row' }).getByLabel('Add Row').click();
-    await page.getByRole('row', { name: 'Delete Row No #000000 Add Row' }).getByLabel('Add Row').click();
-    await page.getByRole('row', { name: 'Delete Row No #000000 Add Row' }).getByPlaceholder('Sub Answer').click();
-    await page.getByRole('row', { name: 'Delete Row No #000000 Add Row' }).getByPlaceholder('Sub Answer').fill('Low');
-    await page.getByRole('textbox', { name: 'Sub Answer' }).nth(3).click();
-    await page.getByRole('textbox', { name: 'Sub Answer' }).nth(3).fill('M');
-    await page.getByRole('row', { name: 'M #000000 Delete Row' }).getByPlaceholder('Sub Answer').fill('Medium');
-    await page.getByRole('textbox', { name: 'Sub Answer' }).nth(4).click();
-    await page.getByRole('textbox', { name: 'Sub Answer' }).nth(4).fill('Hi');
-    await page.getByRole('cell', { name: 'Hi' }).getByPlaceholder('Sub Answer').fill('High');
-    await page.getByRole('textbox', { name: 'Sub Answer' }).nth(5).click();
-    await page.getByRole('textbox', { name: 'Sub Answer' }).nth(5).fill('V');
-    await page.getByRole('row', { name: 'V #000000 Delete Row' }).getByPlaceholder('Sub Answer').fill('Very High');
-    await page.locator('[id=":r5v:"]').click();
-    await page.locator('[id=":r5v:"]').fill('Extremely High');
-    await page.getByRole('row', { name: 'Delete Row No Low #000000 Add' }).getByPlaceholder('Weightage').click();
-    await page.getByRole('row', { name: 'Delete Row No Low #000000 Add' }).getByPlaceholder('Weightage').fill('4');
-    await page.getByRole('row', { name: 'Medium #000000 Delete Row' }).getByPlaceholder('Weightage').click();
-    await page.getByRole('row', { name: 'Medium #000000 Delete Row' }).getByPlaceholder('Weightage').fill('3');
-    await page.getByRole('row', { name: 'High #000000 Delete Row', exact: true }).getByPlaceholder('Weightage').click();
-    await page.getByRole('row', { name: 'High #000000 Delete Row', exact: true }).getByPlaceholder('Weightage').fill('2');
-    await page.getByRole('row', { name: 'High 2 #000000 Delete Row' }).getByPlaceholder('Weightage').fill('21');
-    await page.getByRole('row', { name: 'Very High #000000 Delete Row' }).getByPlaceholder('Weightage').click();
-    await page.getByRole('cell', { name: '21' }).getByPlaceholder('Weightage').click();
-    await page.getByRole('cell', { name: '21' }).getByPlaceholder('Weightage').fill('2');
-    await page.getByRole('row', { name: 'Very High #000000 Delete Row' }).getByPlaceholder('Weightage').click();
-    await page.getByRole('row', { name: 'Very High #000000 Delete Row' }).getByPlaceholder('Weightage').fill('1');
-    await page.getByRole('textbox', { name: 'Weightage' }).nth(3).click();
-    await page.getByRole('textbox', { name: 'Weightage' }).nth(3).fill('0');
-    await page.getByRole('row', { name: 'Delete Row No Low 4 #000000' }).locator('input[type="color"]').click();
-    await page.getByRole('row', { name: 'Delete Row No Low 4 #000000' }).locator('input[type="color"]').fill('#7be3e5');
-    await page.getByRole('cell', { name: '#000000' }).first().click();
-    await page.getByRole('row', { name: 'Medium 3 #000000 Delete Row' }).locator('input[type="color"]').fill('#e5c671');
-    await page.getByRole('cell', { name: '#000000' }).nth(1).click();
-    await page.getByRole('cell', { name: '#000000' }).nth(1).click();
-    await page.getByRole('row', { name: 'High 2 #000000 Delete Row' }).locator('input[type="color"]').fill('#e6d165');
-    await page.getByRole('row', { name: 'Very High 1 #000000 Delete Row' }).locator('input[type="color"]').click();
-    await page.getByRole('row', { name: 'Very High 1 #000000 Delete Row' }).locator('input[type="color"]').fill('#df6626');
-    await page.locator('tr:nth-child(7) > td:nth-child(7) > .MuiTableCell-root > .MuiBox-root').click();
-    await page.locator('tr:nth-child(7) > td:nth-child(7) > .MuiTableCell-root > .MuiBox-root').fill('#f21818');
-    await page.locator('tr:nth-child(7) > td:nth-child(7) > .MuiTableCell-root > .MuiBox-root').click();
-    await page.getByRole('button', { name: 'Save' }).click();
-    await page.getByRole('button', { name: 'Click Next to Proceed' }).click();
-    await page.getByRole('button', { name: 'Add Row' }).click();
-    await page.getByRole('button', { name: 'Add Row' }).click();
-    await page.getByRole('button', { name: 'Add Row' }).click();
-    await page.getByRole('combobox', { name: 'System Alias' }).first().click();
-    await page.getByRole('option', { name: 'Open' }).click();
-    await page.getByRole('option', { name: 'Open' }).click();
-    await page.getByRole('combobox', { name: 'System Alias' }).nth(1).click();
-    await page.getByRole('option', { name: 'Completed' }).click();
-    await page.locator('td').filter({ hasText: 'System AliasSystem Alias *' }).getByLabel('System Alias').click();
-    await page.getByRole('option', { name: 'Wip' }).click();
-    await page.locator('tr').filter({ hasText: 'System AliasOpenSystem Alias *' }).getByRole('textbox').click();
-    await page.locator('tr').filter({ hasText: 'System AliasOpenSystem Alias *' }).getByRole('textbox').fill('Open');
-    await page.getByRole('cell', { name: 'Open' }).getByRole('textbox').click();
-    await page.getByRole('cell', { name: 'Open' }).getByRole('textbox').fill('');
-    await page.getByRole('cell', { name: 'Open' }).getByRole('textbox').press('CapsLock');
-    await page.getByRole('cell', { name: 'Open' }).getByRole('textbox').fill('OPEN');
-    await page.locator('tr').filter({ hasText: 'System AliasCompletedSystem' }).getByRole('textbox').click();
-    await page.locator('tr').filter({ hasText: 'System AliasCompletedSystem' }).getByRole('textbox').fill('COMPLETED');
-    await page.getByRole('row', { name: 'System Alias Remove Row', exact: true }).getByRole('textbox').click();
-    await page.getByRole('row', { name: 'System Alias Remove Row', exact: true }).getByRole('textbox').fill('WIP');
-    await page.getByRole('row', { name: 'System Alias Remove Row', exact: true }).getByRole('textbox').press('CapsLock');
-    await page.getByRole('row', { name: 'System Alias Remove Row', exact: true }).getByRole('textbox').click();
-    await page.getByRole('button', { name: 'Save' }).click();
-    await page.getByRole('button', { name: 'Click Next to Proceed' }).click();
-    await page.getByRole('paragraph').getByRole('button').filter({ hasText: /^$/ }).click();
-    await page.getByRole('paragraph').getByRole('button').filter({ hasText: /^$/ }).click();
-    await page.getByRole('button').nth(3).click();
-    await page.getByRole('button').nth(3).click();
-    await page.getByRole('button').nth(3).click();
-    await page.getByRole('button').nth(3).click();
-    await page.getByRole('spinbutton').first().click();
-    await page.getByRole('spinbutton').first().fill('0');
-    await page.getByRole('spinbutton').nth(1).click();
-    await page.getByRole('spinbutton').nth(1).fill('50');
-    await page.getByRole('spinbutton').nth(2).click();
-    await page.getByRole('spinbutton').nth(2).fill('51');
-    await page.getByRole('spinbutton').nth(3).click();
-    await page.getByRole('spinbutton').nth(3).fill('60');
-    await page.getByRole('spinbutton').nth(4).click();
-    await page.getByRole('spinbutton').nth(4).fill('61');
-    await page.getByRole('spinbutton').nth(5).click();
-    await page.getByRole('spinbutton').nth(5).fill('70');
-    await page.locator('[id=":r8k:"]').click();
-    await page.locator('[id=":r8k:"]').fill('71');
-    await page.locator('[id=":r8l:"]').click();
-    await page.locator('[id=":r8l:"]').fill('90');
-    await page.locator('[id=":r8s:"]').click();
-    await page.locator('[id=":r8s:"]').fill('90');
-    await page.locator('[id=":r8t:"]').click();
-    await page.locator('[id=":r8s:"]').click();
-    await page.locator('[id=":r8s:"]').fill('91');
-    await page.locator('[id=":r8t:"]').click();
-    await page.locator('[id=":r8t:"]').fill('100');
-    await page.getByRole('textbox').first().click();
-    await page.locator('[id=":r8u:"]').click();
-    await page.locator('[id=":r8u:"]').fill('A');
-    await page.locator('[id=":r8m:"]').click();
-    await page.locator('[id=":r8m:"]').press('CapsLock');
-    await page.locator('[id=":r8m:"]').fill('BC');
-    await page.locator('[id=":r8e:"]').click();
-    await page.locator('[id=":r8e:"]').fill('C');
-    await page.locator('[id=":r8m:"]').click();
-    await page.locator('[id=":r8m:"]').fill('B');
-    await page.getByRole('textbox').nth(4).click();
-    await page.getByRole('textbox').nth(4).fill('D');
-    await page.getByRole('textbox').first().click();
-    await page.getByRole('textbox').first().fill('E');
-    await page.getByRole('textbox').nth(2).click();
-    await page.getByRole('textbox').nth(2).fill('EXTREMELY HIGH RISK');
-    await page.locator('input[type="text"]').nth(5).click();
-    await page.locator('input[type="text"]').nth(5).fill('VERY HIGH RISK');
-    await page.locator('[id=":r8g:"]').click();
-    await page.locator('[id=":r8g:"]').fill('HIGH RISK');
-    await page.locator('[id=":r8o:"]').click();
-    await page.locator('[id=":r8o:"]').fill('MEDIUM RISK');
-    await page.locator('[id=":r90:"]').click();
-    await page.locator('[id=":r90:"]').fill('LOW RISK');
-    await page.getByRole('row', { name: '100 A LOW RISK #000000' }).locator('input[type="color"]').click();
-    await page.getByRole('row', { name: '100 A LOW RISK #000000' }).locator('input[type="color"]').fill('#7eb3ec');
-    await page.getByRole('row', { name: '90 B MEDIUM RISK #000000' }).locator('input[type="color"]').click();
-    await page.getByRole('row', { name: '90 B MEDIUM RISK #000000' }).locator('input[type="color"]').fill('#f5ec84');
-    await page.getByRole('row', { name: '70 C HIGH RISK #000000' }).locator('input[type="color"]').click();
-    await page.getByRole('row', { name: '70 C HIGH RISK #000000' }).locator('input[type="color"]').fill('#e29b83');
-    await page.getByRole('row', { name: '51 60 D VERY HIGH RISK #' }).locator('input[type="color"]').click();
-    await page.getByRole('row', { name: '51 60 D VERY HIGH RISK #' }).locator('input[type="color"]').fill('#b16868');
-    await page.getByRole('cell', { name: '#000000' }).getByRole('textbox').click();
-    await page.getByRole('cell', { name: '#000000' }).getByRole('textbox').fill('#f31212');
-    await page.getByRole('textbox').nth(1).click();
-    await page.getByRole('textbox').nth(1).fill('UNSATISFACTORY RUN');
-    await page.getByRole('textbox').nth(5).click();
-    await page.getByRole('textbox').nth(5).fill('S');
-    await page.getByRole('cell', { name: 'S', exact: true }).getByRole('textbox').fill('SATISFACTORY RUN');
-    await page.locator('[id=":r8f:"]').click();
-    await page.locator('[id=":r8f:"]').fill('WELL RUN');
-    await page.locator('[id=":r8n:"]').click();
-    await page.locator('[id=":r8n:"]').fill('FAIRLY WELL RUN');
-    await page.locator('[id=":r8v:"]').click();
-    await page.locator('[id=":r8v:"]').fill('EXCELLENT RUN');
-    await page.locator('td:nth-child(7)').first().click();
-    await page.getByRole('option', { name: 'Monthly' }).click();
-    await page.getByRole('row', { name: '51 60 D SATISFACTORY RUN VERY' }).getByRole('combobox').click();
-    await page.getByRole('option', { name: 'Monthly' }).click();
-    await page.getByRole('row', { name: '70 C WELL RUN HIGH RISK #e29b83' }).getByRole('combobox').click();
-    await page.getByRole('option', { name: 'Quarterly' }).click();
-    await page.getByRole('row', { name: '71 90 B FAIRLY WELL RUN' }).getByRole('combobox').click();
-    await page.getByRole('option', { name: 'Half Yearly' }).click();
-    await page.getByRole('row', { name: '91 100 A EXCELLENT RUN LOW' }).getByRole('combobox').click();
-    await page.getByRole('option', { name: 'Yearly', exact: true }).click();
-    await page.getByRole('button', { name: 'Save' }).click();
-    await page.getByRole('button', { name: 'Finish' }).click();
-    await page.getByRole('button', { name: 'Yes' }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('menuitem', { name: 'Admin' }).click();
-    await page.getByRole('menuitem', { name: 'Audit Type' }).click();
-    await page.getByRole('menuitem', { name: 'View List' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    // -------------Map Audit Type to Area-----------------    
-    await page.getByRole('menuitem', { name: 'Admin' }).click();
-    await page.getByRole('menuitem', { name: 'Audit Type' }).click();
-    await page.getByRole('menuitem', { name: 'Map AuditType To Area' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByRole('combobox').nth(1).click();
-    await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
-    await page.getByRole('checkbox', { name: 'Mumbai Ho' }).check();
-    await page.getByRole('button', { name: 'move selected right' }).first().click();
-    await page.getByRole('checkbox', { name: 'C1_CCSA_BA1' }).check();
-    await page.getByRole('checkbox', { name: 'C1_CCSA_BA2' }).check();
-    await page.getByRole('checkbox', { name: 'C1_CCSA_BA3' }).check();
-    await page.getByRole('button', { name: 'move selected left' }).nth(1).click();
-    await page.getByRole('button', { name: 'Map' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByRole('combobox').nth(1).click();
-    await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
-    await page.getByRole('checkbox', { name: 'Pune Branch' }).check();
-    await page.getByRole('button', { name: 'move selected right' }).first().click();
-    await page.getByRole('checkbox', { name: 'C1_CCSA_BA1' }).check();
-    await page.getByRole('checkbox', { name: 'C1_CCSA_BA2' }).check();
-    await page.getByRole('button', { name: 'move selected left' }).nth(1).click();
-    await page.getByRole('button', { name: 'Map' }).click();
-    // -------------Create Workflow-----------------
-    await page.getByRole('menuitem', { name: 'Admin' }).click();
-    await page.getByRole('menuitem', { name: 'Workflow', exact: true }).click();
-    await page.getByRole('menuitem', { name: 'Create' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.locator('#mui-component-select-auditTypeId').click();
-    await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Name' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Name' }).fill('B');
-    await page.getByRole('textbox', { name: 'Workflow Name' }).press('CapsLock');
-    await page.getByRole('textbox', { name: 'Workflow Name' }).fill('Basic (');
-    await page.getByRole('textbox', { name: 'Workflow Name' }).press('CapsLock');
-    await page.getByRole('textbox', { name: 'Workflow Name' }).press('CapsLock');
-    await page.getByRole('textbox', { name: 'Workflow Name' }).fill('Basic (C1C');
-    await page.getByRole('textbox', { name: 'Workflow Name' }).press('CapsLock');
-    await page.getByRole('textbox', { name: 'Workflow Name' }).fill('Basic (C1ConcurrentSimpleWF)');
-    await page.getByRole('combobox', { name: 'Audit Type', exact: true }).click();
-    await page.getByRole('option', { name: 'ACTIVE', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    // -------------Create Workflow Stages-----------------
-    await page.getByRole('menuitem', { name: 'Admin' }).click();
-    await page.getByRole('menuitem', { name: 'Workflow', exact: true }).click();
-    await page.getByRole('menuitem', { name: 'Admin' }).click();
-    await page.getByRole('menuitem', { name: 'Workflow Stages' }).click();
-    await page.getByRole('menuitem', { name: 'Create' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByLabel('', { exact: true }).click();
-    await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).fill('Audit Planned');
-    await page.getByRole('combobox', { name: 'Audit Type', exact: true }).click();
-    await page.getByRole('option', { name: 'ACTIVE', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).fill('Audit Created');
-    await page.getByRole('combobox', { name: 'Audit Type', exact: true }).click();
-    await page.getByRole('option', { name: 'ACTIVE', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).fill('Document Upload');
-    await page.getByRole('combobox', { name: 'Audit Type', exact: true }).click();
-    await page.getByRole('option', { name: 'ACTIVE', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).fill('Audit In Progress');
-    await page.getByRole('combobox', { name: 'Audit Type', exact: true }).click();
-    await page.getByRole('option', { name: 'ACTIVE', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).fill('Audit Completed');
-    await page.getByRole('combobox', { name: 'Audit Type', exact: true }).click();
-    await page.getByRole('option', { name: 'ACTIVE', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).fill('Compliance In Progress');
-    await page.getByRole('combobox', { name: 'Audit Type', exact: true }).click();
-    await page.getByRole('option', { name: 'ACTIVE', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).fill('Compliance Verification');
-    await page.getByRole('combobox', { name: 'Audit Type', exact: true }).click();
-    await page.getByRole('option', { name: 'ACTIVE', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).click();
-    await page.getByRole('textbox', { name: 'Workflow Stage Name' }).fill('Audit Closed');
-    await page.getByRole('combobox', { name: 'Audit Type', exact: true }).click();
-    await page.getByRole('option', { name: 'ACTIVE', exact: true }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    // -------------Assign Workflow-----------------
-    await page.getByRole('link', { name: 'Assign Sequence to Workflow' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByRole('combobox', { name: 'Stage Workflow' }).click();
-    await page.getByRole('option', { name: 'Basic (C1ConcurrentSimpleWF)' }).click();
-    await page.getByRole('option', { name: 'Basic (C1ConcurrentSimpleWF)' }).click();
-    await page.getByRole('option', { name: 'Audit Planned' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).fill('1');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Select Workflow Stage' }).click();
-    await page.getByRole('option', { name: 'Audit Created' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).fill('2');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Select Workflow Stage' }).click();
-    await page.getByRole('option', { name: 'Document Upload' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).fill('3');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Select Workflow Stage' }).click();
-    await page.getByRole('option', { name: 'Audit In Progress' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).fill('4');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Select Workflow Stage' }).click();
-    await page.getByRole('option', { name: 'Audit Completed' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).fill('5');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Select Workflow Stage' }).click();
-    await page.getByRole('option', { name: 'Compliance In Progress' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).fill('6');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Select Workflow Stage' }).click();
-    await page.getByRole('option', { name: 'Compliance Verification' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).fill('7');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Select Workflow Stage' }).click();
-    await page.getByRole('option', { name: 'Audit Closed' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).click();
-    await page.getByRole('spinbutton', { name: 'Workflow Stage Number' }).fill('8');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByText('Note: After assigning').click();
-    // -------------Manage Workflow Access-----------------
-    await page.getByRole('link', { name: 'Manage Workflow Access' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByRole('combobox', { name: 'Audit Type' }).click();
-    await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
-    await page.getByRole('combobox', { name: 'Role' }).click();
-    await page.getByRole('option', { name: 'C1Auditor' }).click();
-    await page.locator('tr:nth-child(4) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(5) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('body').press('ScrollLock');
-    await page.locator('tr:nth-child(7) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(8) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(4) > td:nth-child(14) > .MuiSvgIcon-root > path').click();
-    await page.locator('tr:nth-child(3) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Role C1Auditor' }).click();
-    await page.getByRole('option', { name: 'C1Auditee' }).click();
-    await page.locator('tr:nth-child(2) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(3) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(2) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(6) > td:nth-child(6) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(2) > td:nth-child(2) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(3) > td:nth-child(2) > .MuiSvgIcon-root').click();
-    await page.locator('body').press('ScrollLock');
-    await page.locator('tr:nth-child(3) > td:nth-child(6) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(3) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(6) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Role C1Auditee' }).click();
-    await page.getByRole('option', { name: 'C1Auditor' }).click();
-    await page.locator('tr:nth-child(2) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(5) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(7) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.locator('body').press('ScrollLock');
-    await page.locator('tr:nth-child(8) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Role C1Auditor' }).click();
-    await page.getByRole('option', { name: 'C1OrgAdmin' }).click();
-    await page.getByTestId('CheckBoxOutlineBlankIcon').first().click();
-    await page.locator('tr:nth-child(2) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(3) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(5) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(4) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(6) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(7) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(8) > td:nth-child(3) > .MuiSvgIcon-root').click();
-    await page.getByTestId('CheckBoxOutlineBlankIcon').nth(2).click();
-    await page.locator('tr:nth-child(2) > td:nth-child(6) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(3) > td:nth-child(6) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(4) > td:nth-child(6) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(5) > td:nth-child(6) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(6) > td:nth-child(6) > .MuiSvgIcon-root > path').click();
-    await page.locator('tr:nth-child(6) > td:nth-child(6) > .MuiSvgIcon-root').click();
-    await page.getByTestId('CheckBoxOutlineBlankIcon').nth(4).click();
-    await page.locator('tr:nth-child(2) > td:nth-child(9) > .MuiSvgIcon-root > path').click();
-    await page.locator('tr:nth-child(5) > td:nth-child(9) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(6) > td:nth-child(9) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(7) > td:nth-child(9) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(8) > td:nth-child(9) > .MuiSvgIcon-root').click();
-    await page.locator('td:nth-child(12) > .MuiSvgIcon-root').first().click();
-    await page.locator('tr:nth-child(2) > td:nth-child(12) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(3) > td:nth-child(12) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(4) > td:nth-child(12) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(5) > td:nth-child(12) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(6) > td:nth-child(12) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(7) > td:nth-child(12) > .MuiSvgIcon-root > path').click();
-    await page.locator('td:nth-child(14) > .MuiSvgIcon-root').first().click();
-    await page.locator('tr:nth-child(2) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(3) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(4) > td:nth-child(14) > .MuiSvgIcon-root > path').click();
-    await page.locator('tr:nth-child(8) > td:nth-child(14) > .MuiSvgIcon-root').click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('combobox', { name: 'Role C1OrgAdmin' }).click();
-    await page.getByRole('option', { name: 'C1Auditee' }).click();
-    await page.locator('tr:nth-child(3) > td:nth-child(9) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(3) > td:nth-child(12) > .MuiSvgIcon-root').click();
-    await page.locator('tr:nth-child(6) > td:nth-child(9) > .MuiSvgIcon-root > path').click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    // -------------Define Workflow-----------------
-    await page.getByRole('link', { name: 'Define Workflow' }).click();
-    await page.getByRole('combobox', { name: 'Organization' }).click();
-    await page.getByRole('option', { name: 'Company1' }).click();
-    await page.getByRole('combobox', { name: 'Audit Type' }).click();
-    await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
-    await page.getByRole('combobox', { name: 'Workflow Stages' }).first().click();
-    await page.getByRole('option', { name: 'Audit In Progress' }).click();
-    await page.getByRole('checkbox', { name: 'Set Audit Actual Start Date' }).check();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.locator('form').getByText('Audit In Progress').click();
-    await page.getByRole('option', { name: 'Audit Completed' }).click();
-    await page.getByRole('checkbox', { name: 'Generate Audit Complete Report' }).check();
-    await page.getByRole('checkbox', { name: 'Set Audit Actual Finish Date' }).check();
-    await page.getByRole('checkbox', { name: 'Generate Score' }).check();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('checkbox', { name: 'Set Udin No' }).check();
-    await page.getByRole('checkbox', { name: 'Set Udin No' }).press('ScrollLock');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.locator('form').getByText('Audit Completed').click();
-    await page.getByRole('option', { name: 'Audit Closed' }).click();
-    await page.getByRole('checkbox', { name: 'Set Audit Closed Date' }).check();
-    await page.getByRole('checkbox', { name: 'Generate Audit Closed Report' }).check();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.locator('form').getByText('Audit Closed', { exact: true }).click();
-    await page.getByRole('option', { name: 'Compliance Verification' }).click();
-    await page.getByRole('combobox', { name: 'Select Fields' }).click();
-    await page.getByRole('option', { name: 'Control Effectiveness' }).click();
-    await page.getByRole('button', { name: 'Submit' }).click();
-    // -------------Create Audit-----------------
-    await page.getByRole('menuitem', { name: 'Audit' }).click();
-    await page.getByRole('menuitem', { name: 'Audit Annual Plan' }).click();
-    await page.getByRole('combobox', { name: 'Audit Type' }).click();
-    await page.getByRole('option', { name: 'C1 Concurrent Simple' }).click();
-    await page.getByRole('combobox', { name: 'Frequency' }).click();
-    await page.getByRole('option', { name: 'By Audit Type' }).click();
-    await page.getByRole('combobox', { name: 'Audit Plan for' }).click();
-    await page.getByRole('option', { name: 'Calendar Year' }).click();
-    await page.getByRole('button', { name: 'Generate', exact: true }).click();
-    await page.getByRole('combobox', { name: 'Months of 2025' }).click();
-    await page.getByRole('option', { name: 'Jan' }).click();
-    await page.getByRole('button', { name: 'Generate Schedule' }).click();
-    await page.getByRole('button', { name: 'Initiate Audit' }).click();
-    await page.getByLabel('', { exact: true }).click();
-    await page.getByRole('option', { name: 'Audit Created' }).click();
-    await page.getByRole('textbox', { name: 'Audit Name' }).click();
-    await page.getByRole('textbox', { name: 'Audit Name' }).fill('C1 Concurrent Simple JAN 2025');
-    await page.getByRole('textbox', { name: 'Planned Start Date' }).fill('2025-01-02');
-    await page.getByRole('textbox', { name: 'Planned Finish Date' }).fill('2025-01-02');
-    await page.getByRole('textbox', { name: 'Planned Start Time' }).click();
-    await page.getByRole('textbox', { name: 'Planned Start Time' }).fill('10:00');
-    await page.getByRole('textbox', { name: 'Planned Finish Time' }).click();
-    await page.getByRole('textbox', { name: 'Planned Finish Time' }).fill('17:00');
-    await page.getByRole('textbox', { name: 'Audit Period From' }).fill('2024-12-01');
-    await page.getByRole('textbox', { name: 'Audit Period To' }).fill('2024-12-31');
-    await page.getByRole('textbox', { name: 'Audit Scope' }).click();
-    await page.getByRole('textbox', { name: 'Audit Scope' }).fill('Scope');
-    await page.getByRole('textbox', { name: 'Audit Objective' }).click();
-    await page.getByRole('textbox', { name: 'Audit Objective' }).fill('Objective');
-    await page.getByRole('button', { name: 'Add Users +' }).click();
-    await page.getByRole('button', { name: 'Add Users +' }).click();
-    await page.getByRole('button', { name: 'Add Users +' }).click();
-    await page.getByRole('button', { name: 'Add Users +' }).click();
-    await page.getByRole('button', { name: 'Add Users +' }).click();
-    await page.getByRole('button', { name: 'Remove' }).nth(4).click();
-    await page.getByRole('button', { name: 'Remove' }).nth(2).click();
-    await page.getByRole('combobox', { name: 'Select User' }).first().click();
-    await page.getByRole('option', { name: 'c1companyadmin-C1OrgAdmin' }).click();
-    await page.getByRole('combobox', { name: 'Select User' }).nth(1).click();
-    await page.getByRole('option', { name: 'c1companyauditee-C1Auditee' }).click();
-    await page.getByRole('combobox', { name: 'Select User' }).nth(2).click();
-    await page.getByRole('option', { name: 'c1companyauditor-C1Auditor' }).click();
-    await page.getByRole('combobox', { name: 'Assign Audit Level Role' }).first().click();
-    await page.getByRole('checkbox').uncheck();
-    await page.getByText('C1OrgAdmin', { exact: true }).click();
-    await page.getByRole('combobox', { name: 'Assign Audit Level Role' }).nth(1).click();
-    await page.getByRole('checkbox').uncheck();
-    await page.getByText('C1Auditee', { exact: true }).click();
-    await page.getByRole('combobox', { name: 'Assign Audit Level Role' }).nth(2).click();
-    await page.getByRole('checkbox').uncheck();
-    await page.locator('#menu-').getByText('default').click();
-    await page.getByRole('checkbox', { name: 'Is Lead Auditor?' }).check();
-    await page.getByRole('button', { name: 'Create' }).click();
-    await page.getByRole('menuitem', { name: 'Audit' }).click();
-    await page.getByRole('menuitem', { name: 'List View' }).click();
-    
+test("test", async ({ page }) => {
+  await page.goto(
+    "http://localhost:8080/realms/aspl-realm/protocol/openid-connect/auth?response_type=code&client_id=aspl-open-id&redirect_uri=http%3A%2F%2Flocalhost%3A3000&code_challenge=UW0Eb3jCQySRSm6IYatJ1DfOG3EhgglgD-rdEW9uM90&code_challenge_method=S256&scope=profile+openid&state=customLoginState"
+  );
+  await page.getByRole("textbox", { name: "Username or email" }).click();
+  await page
+    .getByRole("textbox", { name: "Username or email" })
+    .fill("vishalp");
+  await page.getByRole("textbox", { name: "Password" }).click();
+  await page.getByRole("textbox", { name: "Password" }).fill("12345");
+  await page.getByRole("button", { name: "Sign In" }).click();
+  await page.locator("div").filter({ hasText: "AMS" }).nth(4).click();
+  await page.getByRole("menuitem", { name: "Admin" }).click();
+  await page.getByRole("menuitem", { name: "Audit Masters" }).click();
+  // ---------------------- CREATE AREAS ----------------------
+  await page.getByRole("menuitem", { name: "Area", exact: true }).click();
+  await page.getByRole("menuitem", { name: "Create" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.getByRole("textbox", { name: "Area" }).fill("C1_CCSA_BA1");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("textbox", { name: "Area" }).fill("C1_CCSA_BA2");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("textbox", { name: "Area" }).fill("C1_CCSA_BA3");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  // ---------------------- CREATE SUBAREAS ----------------------
+  await page.getByRole("menuitem", { name: "Subarea" }).click();
+  await page.getByRole("menuitem", { name: "Create" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.getByRole("combobox", { name: "Area" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1" }).click();
+  await page.getByRole("textbox", { name: "Subarea" }).fill("C1_CCSA_B1_SA1");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Area" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1" }).click();
+  await page.getByRole("textbox", { name: "Subarea" }).fill("C1_CCSA_BA1_SA2");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Area" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA2" }).click();
+  await page.getByRole("textbox", { name: "Subarea" }).fill("C1_CCSA_BA2_SA1");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  // CREATE QUESTIONS
+  await page.getByRole("menuitem", { name: "Admin" }).click();
+  await page.getByRole("menuitem", { name: "Audit Masters" }).click();
+  await page.getByRole("menuitem", { name: "Question" }).click();
+  await page.getByRole("menuitem", { name: "Create" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.getByRole("combobox", { name: "Area", exact: true }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1" }).click();
+  await page.getByRole("combobox", { name: "Subarea" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1_SA1" }).click();
+  await page
+    .getByRole("textbox", { name: "Question" })
+    .fill("C1_CCSA_BA1_SA1 QUESTION1");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Area", exact: true }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1" }).click();
+  await page.getByRole("combobox", { name: "Subarea" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1_SA1" }).click();
+  await page
+    .getByRole("textbox", { name: "Question" })
+    .fill("C1_CCSA_BA1_SA1 QUESTION2");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Area", exact: true }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1" }).click();
+  await page.getByRole("combobox", { name: "Subarea" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1_SA2" }).click();
+  await page
+    .getByRole("textbox", { name: "Question" })
+    .fill("C1_CCSA_BA1_SA2 QUESTION");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Area", exact: true }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA2" }).click();
+  await page.getByRole("combobox", { name: "Subarea" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA2_SA1" }).click();
+  await page
+    .getByRole("textbox", { name: "Question" })
+    .fill("C1_CCSA_BA2_SA1 QUESTION");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Area", exact: true }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA3" }).click();
+  await page
+    .getByRole("textbox", { name: "Question" })
+    .fill("C1_CCSA_BA3 QUESTION");
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  // CREATE DOCUMENTS
+  await page.getByRole("menuitem", { name: "Admin" }).click();
+  await page.getByRole("menuitem", { name: "Audit Masters" }).click();
+  await page.getByRole("menuitem", { name: "Document" }).click();
+  await page.getByRole("menuitem", { name: "Create" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.getByRole("combobox", { name: "Area" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1" }).click();
+  await page.getByRole("combobox", { name: "Subarea" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1_SA1" }).click();
+  await page.getByRole("combobox", { name: "Question" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1_SA1 QUESTION1" }).click();
+  await page
+    .getByRole("textbox", { name: "Document Name" })
+    .fill("C1_CCSA_AuditLevelDocument1");
+  await page.getByRole("combobox", { name: "Category" }).click();
+  await page.getByRole("option", { name: "AUDITOR" }).click();
+  await page.getByRole("combobox", { name: "Document Type" }).click();
+  await page.getByRole("option", { name: "Annexure" }).click();
+  await page.getByRole("combobox", { name: "Status" }).click();
+  await page.getByRole("option", { name: "Active" }).click();
+  await page
+    .getByRole("button", { name: "Choose File" })
+    .setInputFiles("C1_CCSA_AuditLevelDocument1.xlsx");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Area" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1" }).click();
+  await page.getByRole("combobox", { name: "Subarea" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1_SA1" }).click();
+  await page.getByRole("combobox", { name: "Question" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1_SA1 QUESTION2" }).click();
+  await page
+    .getByRole("textbox", { name: "Document Name" })
+    .fill("C1_CCSA_AuditorDocument1");
+  await page.getByRole("combobox", { name: "Category" }).click();
+  await page.getByRole("option", { name: "AUDITOR" }).click();
+  await page.getByRole("combobox", { name: "Document Type" }).click();
+  await page.getByRole("option", { name: "Supporting" }).click();
+  await page
+    .getByRole("button", { name: "Choose File" })
+    .setInputFiles("C1_CCSA_AuditorDocument1.pdf");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page
+    .getByRole("textbox", { name: "Document Name" })
+    .fill("C1_CCSA_AuditLevelDocument2");
+  await page.getByRole("combobox", { name: "Category" }).click();
+  await page.getByRole("option", { name: "AUDITOR" }).click();
+  await page.getByRole("combobox", { name: "Document Type" }).click();
+  await page.getByRole("option", { name: "Annexure" }).click();
+  await page
+    .getByRole("button", { name: "Choose File" })
+    .setInputFiles("C1_CCSA_AuditLevelDocument2.xlsx");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Area" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1" }).click();
+  await page.getByRole("combobox", { name: "Subarea" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1_SA2" }).click();
+  await page.getByRole("combobox", { name: "Question" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA1_SA2 QUESTION" }).click();
+  await page
+    .getByRole("textbox", { name: "Document Name" })
+    .fill("C1_CCSA_AuditorDocument2");
+  await page.getByRole("combobox", { name: "Category" }).click();
+  await page.getByRole("option", { name: "AUDITOR" }).click();
+  await page.getByRole("combobox", { name: "Document Type" }).click();
+  await page.getByRole("option", { name: "Supporting" }).click();
+  await page
+    .getByRole("button", { name: "Choose File" })
+    .setInputFiles("C1_CCSA_AuditorDocument2.pdf");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page
+    .getByRole("textbox", { name: "Document Name" })
+    .fill("C1_CCSA_AuditeeDocument1");
+  await page.getByRole("combobox", { name: "Category" }).click();
+  await page.getByRole("option", { name: "AUDITEE" }).click();
+  await page.getByRole("combobox", { name: "Document Type" }).click();
+  await page.getByRole("option", { name: "Supporting" }).click();
+  await page
+    .getByRole("button", { name: "Choose File" })
+    .setInputFiles("C1_CCSA_AuditeeDocument1.pdf");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Area" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA2" }).click();
+  await page.getByRole("combobox", { name: "Subarea" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA2_SA1" }).click();
+  await page.getByRole("combobox", { name: "Question" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA2_SA1 QUESTION" }).click();
+  await page
+    .getByRole("textbox", { name: "Document Name" })
+    .fill("C1_CCSA_AuditeeDocument2");
+  await page.getByRole("combobox", { name: "Category" }).click();
+  await page.getByRole("option", { name: "AUDITEE" }).click();
+  await page.getByRole("combobox", { name: "Document Type" }).click();
+  await page.getByRole("option", { name: "Supporting" }).click();
+  await page
+    .getByRole("button", { name: "Choose File" })
+    .setInputFiles("C1_CCSA_AuditeeDocument2.pdf");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Area" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA3" }).click();
+  await page.getByRole("combobox", { name: "Question" }).click();
+  await page.getByRole("option", { name: "C1_CCSA_BA3 QUESTION" }).click();
+  await page
+    .getByRole("textbox", { name: "Document Name" })
+    .fill("C1_CCSA_AuditorDocument3");
+  await page.getByRole("combobox", { name: "Category" }).click();
+  await page.getByRole("option", { name: "AUDITOR" }).click();
+  await page.getByRole("combobox", { name: "Document Type" }).click();
+  await page.getByRole("option", { name: "Supporting" }).click();
+  await page
+    .getByRole("button", { name: "Choose File" })
+    .setInputFiles("C1_CCSA_AuditorDocument3.pdf");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page
+    .getByRole("textbox", { name: "Document Name" })
+    .fill("C1_CCSA_AuditorDocument4");
+  await page.getByRole("combobox", { name: "Category" }).click();
+  await page.getByRole("option", { name: "AUDITOR" }).click();
+  await page.getByRole("combobox", { name: "Document Type" }).click();
+  await page.getByRole("option", { name: "Supporting" }).click();
+  await page
+    .getByRole("button", { name: "Choose File" })
+    .setInputFiles("C1_CCSA_AuditorDocument4.pdf");
+  await page.getByRole("button", { name: "Submit" }).click();
+  // -------------Create Audit Type-----------------
+  await page.getByRole("menuitem", { name: "Admin" }).click();
+  await page.getByRole("menuitem", { name: "Audit Type" }).click();
+  await page.getByRole("menuitem", { name: "Create" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page
+    .getByRole("combobox", { name: "Select Report Type" })
+    .first()
+    .click();
+  await page.getByRole("option", { name: "Columnar" }).click();
+  await page.getByRole("textbox", { name: "Select Color" }).click();
+  await page.getByRole("textbox", { name: "Select Color" }).fill("#97f2e0");
+  await page.getByRole("textbox", { name: "Audit Type Name" }).click();
+  await page
+    .getByRole("textbox", { name: "Audit Type Name" })
+    .fill("C1 Concurrent Simple");
+  await page.getByRole("combobox", { name: "Audit Type Status" }).click();
+  await page.getByRole("option", { name: "ACTIVE", exact: true }).click();
+  await page.getByRole("combobox", { name: "Audit Scoring Method" }).click();
+  await page.getByRole("option", { name: "Basic" }).click();
+  await page.getByRole("combobox", { name: "Loan Scoring Method" }).click();
+  await page.getByRole("option", { name: "Basic" }).click();
+  await page.getByRole("combobox", { name: "Frequency" }).click();
+  await page.getByRole("option", { name: "Quarterly" }).click();
+  await page
+    .getByRole("spinbutton", { name: "Finding Closure Duration (in" })
+    .click();
+  await page
+    .getByRole("spinbutton", { name: "Finding Closure Duration (in" })
+    .fill("7");
+  await page
+    .getByRole("combobox", { name: "Select Report Type" })
+    .nth(1)
+    .click();
+  await page.getByRole("option", { name: "INTERNAL" }).click();
+  await page.getByRole("textbox", { name: "Description" }).click();
+  await page
+    .getByRole("textbox", { name: "Description" })
+    .fill("This is the concurrent simple audit type.");
+  await page.getByRole("radio", { name: "No" }).check();
+  await page.getByRole("button", { name: "Save" }).click();
+  await page.getByRole("button", { name: "Click Next to Proceed" }).click();
+  await page.getByRole("button", { name: "Save" }).click();
+  await page.getByRole("button", { name: "Click Next to Proceed" }).click();
+  await page.getByRole("button", { name: "Save" }).click();
+  await page.getByRole("button", { name: "Click Next to Proceed" }).click();
+  await page.locator("form").getByRole("button", { name: "Add Row" }).click();
+  await page.locator("form").getByRole("button", { name: "Add Row" }).click();
+  await page.locator("#system-alias-select-0").click();
+  await page.getByRole("option", { name: "Open" }).click();
+  await page
+    .getByRole("combobox", { name: "System Alias", exact: true })
+    .click();
+  await page.getByRole("option", { name: "Closed" }).click();
+  await page
+    .getByRole("row", { name: "System Alias Open Remove Row" })
+    .getByRole("textbox")
+    .click();
+  await page
+    .getByRole("row", { name: "System Alias Open Remove Row" })
+    .getByRole("textbox")
+    .fill("Open");
+  await page
+    .getByRole("row", { name: "System Alias Closed Remove Row" })
+    .getByRole("textbox")
+    .click();
+  await page
+    .getByRole("row", { name: "System Alias Closed Remove Row" })
+    .getByRole("textbox")
+    .click();
+  await page
+    .getByRole("row", { name: "System Alias Closed Remove Row" })
+    .getByRole("textbox")
+    .fill("Closed");
+  await page.getByRole("button", { name: "Add Row" }).first().click();
+  await page.getByRole("button", { name: "Add Row" }).first().click();
+  await page.getByRole("button", { name: "Add Row" }).first().click();
+  await page.getByRole("textbox", { name: "Compliance" }).first().click();
+  await page.getByRole("textbox", { name: "Compliance" }).first().fill("Yes");
+  await page.getByRole("textbox", { name: "Compliance" }).nth(1).click();
+  await page.getByRole("textbox", { name: "Compliance" }).nth(1).fill("Na");
+  await page
+    .getByRole("row", { name: "Delete Row #000000 Add Row" })
+    .getByPlaceholder("Compliance")
+    .click();
+  await page
+    .getByRole("row", { name: "Delete Row #000000 Add Row" })
+    .getByPlaceholder("Compliance")
+    .fill("No");
+  await page
+    .getByRole("row", { name: "Delete Row Yes #000000 Add Row" })
+    .getByRole("emphasis")
+    .click();
+  await page.getByRole("option", { name: "Yes" }).click();
+  await page
+    .getByRole("row", { name: "Delete Row Na #000000 Add Row" })
+    .getByRole("combobox")
+    .click();
+  await page.getByRole("option", { name: "NA" }).click();
+  await page
+    .getByRole("row", { name: "Delete Row No #000000 Add Row" })
+    .getByRole("combobox")
+    .click();
+  await page.getByRole("option", { name: "No" }).click();
+  await page
+    .getByRole("row", { name: "Delete Row Yes #000000 Add Row" })
+    .getByLabel("NO")
+    .check();
+  await page
+    .getByRole("row", { name: "Delete Row Na #000000 Add Row" })
+    .getByLabel("NO")
+    .check();
+  await page
+    .getByRole("row", { name: "Delete Row No #000000 Add Row" })
+    .getByLabel("YES")
+    .check();
+  await page
+    .getByRole("row", { name: "Delete Row Yes #000000 Add Row" })
+    .getByPlaceholder("Weightage")
+    .click();
+  await page
+    .getByRole("row", { name: "Delete Row Yes #000000 Add Row" })
+    .getByPlaceholder("Weightage")
+    .fill("5");
+  await page.locator("tr:nth-child(2) > td:nth-child(6)").click();
+  await page
+    .getByRole("row", { name: "Delete Row Na #000000 Add Row" })
+    .getByPlaceholder("Weightage")
+    .fill("5");
+  await page
+    .getByRole("row", { name: "Delete Row Yes 5 #000000 Add" })
+    .locator('input[type="color"]')
+    .click();
+  await page
+    .getByRole("row", { name: "Delete Row Yes 5 #000000 Add" })
+    .locator('input[type="color"]')
+    .fill("#70f25f");
+  await page.getByRole("cell", { name: "#" }).nth(3).click();
+  await page
+    .getByRole("row", { name: "Delete Row Na 5 #000000 Add" })
+    .locator('input[type="color"]')
+    .fill("#61efb9");
+  await page
+    .getByRole("row", { name: "Delete Row No #000000 Add Row" })
+    .getByLabel("Add Row")
+    .click();
+  await page
+    .getByRole("row", { name: "Delete Row No #000000 Add Row" })
+    .getByLabel("Add Row")
+    .click();
+  await page
+    .getByRole("row", { name: "Delete Row No #000000 Add Row" })
+    .getByLabel("Add Row")
+    .click();
+  await page
+    .getByRole("row", { name: "Delete Row No #000000 Add Row" })
+    .getByLabel("Add Row")
+    .click();
+  await page
+    .getByRole("row", { name: "Delete Row No #000000 Add Row" })
+    .getByPlaceholder("Sub Answer")
+    .click();
+  await page
+    .getByRole("row", { name: "Delete Row No #000000 Add Row" })
+    .getByPlaceholder("Sub Answer")
+    .fill("Low");
+  await page.getByRole("textbox", { name: "Sub Answer" }).nth(3).click();
+  await page.getByRole("textbox", { name: "Sub Answer" }).nth(3).fill("M");
+  await page
+    .getByRole("row", { name: "M #000000 Delete Row" })
+    .getByPlaceholder("Sub Answer")
+    .fill("Medium");
+  await page.getByRole("textbox", { name: "Sub Answer" }).nth(4).click();
+  await page.getByRole("textbox", { name: "Sub Answer" }).nth(4).fill("Hi");
+  await page
+    .getByRole("cell", { name: "Hi" })
+    .getByPlaceholder("Sub Answer")
+    .fill("High");
+  await page.getByRole("textbox", { name: "Sub Answer" }).nth(5).click();
+  await page.getByRole("textbox", { name: "Sub Answer" }).nth(5).fill("V");
+  await page
+    .getByRole("row", { name: "V #000000 Delete Row" })
+    .getByPlaceholder("Sub Answer")
+    .fill("Very High");
+  await page.locator('[id=":r5v:"]').click();
+  await page.locator('[id=":r5v:"]').fill("Extremely High");
+  await page
+    .getByRole("row", { name: "Delete Row No Low #000000 Add" })
+    .getByPlaceholder("Weightage")
+    .click();
+  await page
+    .getByRole("row", { name: "Delete Row No Low #000000 Add" })
+    .getByPlaceholder("Weightage")
+    .fill("4");
+  await page
+    .getByRole("row", { name: "Medium #000000 Delete Row" })
+    .getByPlaceholder("Weightage")
+    .click();
+  await page
+    .getByRole("row", { name: "Medium #000000 Delete Row" })
+    .getByPlaceholder("Weightage")
+    .fill("3");
+  await page
+    .getByRole("row", { name: "High #000000 Delete Row", exact: true })
+    .getByPlaceholder("Weightage")
+    .click();
+  await page
+    .getByRole("row", { name: "High #000000 Delete Row", exact: true })
+    .getByPlaceholder("Weightage")
+    .fill("2");
+  await page
+    .getByRole("row", { name: "High 2 #000000 Delete Row" })
+    .getByPlaceholder("Weightage")
+    .fill("21");
+  await page
+    .getByRole("row", { name: "Very High #000000 Delete Row" })
+    .getByPlaceholder("Weightage")
+    .click();
+  await page
+    .getByRole("cell", { name: "21" })
+    .getByPlaceholder("Weightage")
+    .click();
+  await page
+    .getByRole("cell", { name: "21" })
+    .getByPlaceholder("Weightage")
+    .fill("2");
+  await page
+    .getByRole("row", { name: "Very High #000000 Delete Row" })
+    .getByPlaceholder("Weightage")
+    .click();
+  await page
+    .getByRole("row", { name: "Very High #000000 Delete Row" })
+    .getByPlaceholder("Weightage")
+    .fill("1");
+  await page.getByRole("textbox", { name: "Weightage" }).nth(3).click();
+  await page.getByRole("textbox", { name: "Weightage" }).nth(3).fill("0");
+  await page
+    .getByRole("row", { name: "Delete Row No Low 4 #000000" })
+    .locator('input[type="color"]')
+    .click();
+  await page
+    .getByRole("row", { name: "Delete Row No Low 4 #000000" })
+    .locator('input[type="color"]')
+    .fill("#7be3e5");
+  await page.getByRole("cell", { name: "#000000" }).first().click();
+  await page
+    .getByRole("row", { name: "Medium 3 #000000 Delete Row" })
+    .locator('input[type="color"]')
+    .fill("#e5c671");
+  await page.getByRole("cell", { name: "#000000" }).nth(1).click();
+  await page.getByRole("cell", { name: "#000000" }).nth(1).click();
+  await page
+    .getByRole("row", { name: "High 2 #000000 Delete Row" })
+    .locator('input[type="color"]')
+    .fill("#e6d165");
+  await page
+    .getByRole("row", { name: "Very High 1 #000000 Delete Row" })
+    .locator('input[type="color"]')
+    .click();
+  await page
+    .getByRole("row", { name: "Very High 1 #000000 Delete Row" })
+    .locator('input[type="color"]')
+    .fill("#df6626");
+  await page
+    .locator(
+      "tr:nth-child(7) > td:nth-child(7) > .MuiTableCell-root > .MuiBox-root"
+    )
+    .click();
+  await page
+    .locator(
+      "tr:nth-child(7) > td:nth-child(7) > .MuiTableCell-root > .MuiBox-root"
+    )
+    .fill("#f21818");
+  await page
+    .locator(
+      "tr:nth-child(7) > td:nth-child(7) > .MuiTableCell-root > .MuiBox-root"
+    )
+    .click();
+  await page.getByRole("button", { name: "Save" }).click();
+  await page.getByRole("button", { name: "Click Next to Proceed" }).click();
+  await page.getByRole("button", { name: "Add Row" }).click();
+  await page.getByRole("button", { name: "Add Row" }).click();
+  await page.getByRole("button", { name: "Add Row" }).click();
+  await page.getByRole("combobox", { name: "System Alias" }).first().click();
+  await page.getByRole("option", { name: "Open" }).click();
+  await page.getByRole("option", { name: "Open" }).click();
+  await page.getByRole("combobox", { name: "System Alias" }).nth(1).click();
+  await page.getByRole("option", { name: "Completed" }).click();
+  await page
+    .locator("td")
+    .filter({ hasText: "System AliasSystem Alias *" })
+    .getByLabel("System Alias")
+    .click();
+  await page.getByRole("option", { name: "Wip" }).click();
+  await page
+    .locator("tr")
+    .filter({ hasText: "System AliasOpenSystem Alias *" })
+    .getByRole("textbox")
+    .click();
+  await page
+    .locator("tr")
+    .filter({ hasText: "System AliasOpenSystem Alias *" })
+    .getByRole("textbox")
+    .fill("Open");
+  await page.getByRole("cell", { name: "Open" }).getByRole("textbox").click();
+  await page.getByRole("cell", { name: "Open" }).getByRole("textbox").fill("");
+  await page
+    .getByRole("cell", { name: "Open" })
+    .getByRole("textbox")
+    .press("CapsLock");
+  await page
+    .getByRole("cell", { name: "Open" })
+    .getByRole("textbox")
+    .fill("OPEN");
+  await page
+    .locator("tr")
+    .filter({ hasText: "System AliasCompletedSystem" })
+    .getByRole("textbox")
+    .click();
+  await page
+    .locator("tr")
+    .filter({ hasText: "System AliasCompletedSystem" })
+    .getByRole("textbox")
+    .fill("COMPLETED");
+  await page
+    .getByRole("row", { name: "System Alias Remove Row", exact: true })
+    .getByRole("textbox")
+    .click();
+  await page
+    .getByRole("row", { name: "System Alias Remove Row", exact: true })
+    .getByRole("textbox")
+    .fill("WIP");
+  await page
+    .getByRole("row", { name: "System Alias Remove Row", exact: true })
+    .getByRole("textbox")
+    .press("CapsLock");
+  await page
+    .getByRole("row", { name: "System Alias Remove Row", exact: true })
+    .getByRole("textbox")
+    .click();
+  await page.getByRole("button", { name: "Save" }).click();
+  await page.getByRole("button", { name: "Click Next to Proceed" }).click();
+  await page
+    .getByRole("paragraph")
+    .getByRole("button")
+    .filter({ hasText: /^$/ })
+    .click();
+  await page
+    .getByRole("paragraph")
+    .getByRole("button")
+    .filter({ hasText: /^$/ })
+    .click();
+  await page.getByRole("button").nth(3).click();
+  await page.getByRole("button").nth(3).click();
+  await page.getByRole("button").nth(3).click();
+  await page.getByRole("button").nth(3).click();
+  await page.getByRole("spinbutton").first().click();
+  await page.getByRole("spinbutton").first().fill("0");
+  await page.getByRole("spinbutton").nth(1).click();
+  await page.getByRole("spinbutton").nth(1).fill("50");
+  await page.getByRole("spinbutton").nth(2).click();
+  await page.getByRole("spinbutton").nth(2).fill("51");
+  await page.getByRole("spinbutton").nth(3).click();
+  await page.getByRole("spinbutton").nth(3).fill("60");
+  await page.getByRole("spinbutton").nth(4).click();
+  await page.getByRole("spinbutton").nth(4).fill("61");
+  await page.getByRole("spinbutton").nth(5).click();
+  await page.getByRole("spinbutton").nth(5).fill("70");
+  await page.locator('[id=":r8k:"]').click();
+  await page.locator('[id=":r8k:"]').fill("71");
+  await page.locator('[id=":r8l:"]').click();
+  await page.locator('[id=":r8l:"]').fill("90");
+  await page.locator('[id=":r8s:"]').click();
+  await page.locator('[id=":r8s:"]').fill("90");
+  await page.locator('[id=":r8t:"]').click();
+  await page.locator('[id=":r8s:"]').click();
+  await page.locator('[id=":r8s:"]').fill("91");
+  await page.locator('[id=":r8t:"]').click();
+  await page.locator('[id=":r8t:"]').fill("100");
+  await page.getByRole("textbox").first().click();
+  await page.locator('[id=":r8u:"]').click();
+  await page.locator('[id=":r8u:"]').fill("A");
+  await page.locator('[id=":r8m:"]').click();
+  await page.locator('[id=":r8m:"]').press("CapsLock");
+  await page.locator('[id=":r8m:"]').fill("BC");
+  await page.locator('[id=":r8e:"]').click();
+  await page.locator('[id=":r8e:"]').fill("C");
+  await page.locator('[id=":r8m:"]').click();
+  await page.locator('[id=":r8m:"]').fill("B");
+  await page.getByRole("textbox").nth(4).click();
+  await page.getByRole("textbox").nth(4).fill("D");
+  await page.getByRole("textbox").first().click();
+  await page.getByRole("textbox").first().fill("E");
+  await page.getByRole("textbox").nth(2).click();
+  await page.getByRole("textbox").nth(2).fill("EXTREMELY HIGH RISK");
+  await page.locator('input[type="text"]').nth(5).click();
+  await page.locator('input[type="text"]').nth(5).fill("VERY HIGH RISK");
+  await page.locator('[id=":r8g:"]').click();
+  await page.locator('[id=":r8g:"]').fill("HIGH RISK");
+  await page.locator('[id=":r8o:"]').click();
+  await page.locator('[id=":r8o:"]').fill("MEDIUM RISK");
+  await page.locator('[id=":r90:"]').click();
+  await page.locator('[id=":r90:"]').fill("LOW RISK");
+  await page
+    .getByRole("row", { name: "100 A LOW RISK #000000" })
+    .locator('input[type="color"]')
+    .click();
+  await page
+    .getByRole("row", { name: "100 A LOW RISK #000000" })
+    .locator('input[type="color"]')
+    .fill("#7eb3ec");
+  await page
+    .getByRole("row", { name: "90 B MEDIUM RISK #000000" })
+    .locator('input[type="color"]')
+    .click();
+  await page
+    .getByRole("row", { name: "90 B MEDIUM RISK #000000" })
+    .locator('input[type="color"]')
+    .fill("#f5ec84");
+  await page
+    .getByRole("row", { name: "70 C HIGH RISK #000000" })
+    .locator('input[type="color"]')
+    .click();
+  await page
+    .getByRole("row", { name: "70 C HIGH RISK #000000" })
+    .locator('input[type="color"]')
+    .fill("#e29b83");
+  await page
+    .getByRole("row", { name: "51 60 D VERY HIGH RISK #" })
+    .locator('input[type="color"]')
+    .click();
+  await page
+    .getByRole("row", { name: "51 60 D VERY HIGH RISK #" })
+    .locator('input[type="color"]')
+    .fill("#b16868");
+  await page
+    .getByRole("cell", { name: "#000000" })
+    .getByRole("textbox")
+    .click();
+  await page
+    .getByRole("cell", { name: "#000000" })
+    .getByRole("textbox")
+    .fill("#f31212");
+  await page.getByRole("textbox").nth(1).click();
+  await page.getByRole("textbox").nth(1).fill("UNSATISFACTORY RUN");
+  await page.getByRole("textbox").nth(5).click();
+  await page.getByRole("textbox").nth(5).fill("S");
+  await page
+    .getByRole("cell", { name: "S", exact: true })
+    .getByRole("textbox")
+    .fill("SATISFACTORY RUN");
+  await page.locator('[id=":r8f:"]').click();
+  await page.locator('[id=":r8f:"]').fill("WELL RUN");
+  await page.locator('[id=":r8n:"]').click();
+  await page.locator('[id=":r8n:"]').fill("FAIRLY WELL RUN");
+  await page.locator('[id=":r8v:"]').click();
+  await page.locator('[id=":r8v:"]').fill("EXCELLENT RUN");
+  await page.locator("td:nth-child(7)").first().click();
+  await page.getByRole("option", { name: "Monthly" }).click();
+  await page
+    .getByRole("row", { name: "51 60 D SATISFACTORY RUN VERY" })
+    .getByRole("combobox")
+    .click();
+  await page.getByRole("option", { name: "Monthly" }).click();
+  await page
+    .getByRole("row", { name: "70 C WELL RUN HIGH RISK #e29b83" })
+    .getByRole("combobox")
+    .click();
+  await page.getByRole("option", { name: "Quarterly" }).click();
+  await page
+    .getByRole("row", { name: "71 90 B FAIRLY WELL RUN" })
+    .getByRole("combobox")
+    .click();
+  await page.getByRole("option", { name: "Half Yearly" }).click();
+  await page
+    .getByRole("row", { name: "91 100 A EXCELLENT RUN LOW" })
+    .getByRole("combobox")
+    .click();
+  await page.getByRole("option", { name: "Yearly", exact: true }).click();
+  await page.getByRole("button", { name: "Save" }).click();
+  await page.getByRole("button", { name: "Finish" }).click();
+  await page.getByRole("button", { name: "Yes" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("menuitem", { name: "Admin" }).click();
+  await page.getByRole("menuitem", { name: "Audit Type" }).click();
+  await page.getByRole("menuitem", { name: "View List" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  // -------------Map Audit Type to Area-----------------
+  await page.getByRole("menuitem", { name: "Admin" }).click();
+  await page.getByRole("menuitem", { name: "Audit Type" }).click();
+  await page.getByRole("menuitem", { name: "Map AuditType To Area" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.getByRole("combobox").nth(1).click();
+  await page.getByRole("option", { name: "C1 Concurrent Simple" }).click();
+  await page.getByRole("checkbox", { name: "Mumbai Ho" }).check();
+  await page
+    .getByRole("button", { name: "move selected right" })
+    .first()
+    .click();
+  await page.getByRole("checkbox", { name: "C1_CCSA_BA1" }).check();
+  await page.getByRole("checkbox", { name: "C1_CCSA_BA2" }).check();
+  await page.getByRole("checkbox", { name: "C1_CCSA_BA3" }).check();
+  await page.getByRole("button", { name: "move selected left" }).nth(1).click();
+  await page.getByRole("button", { name: "Map" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.getByRole("combobox").nth(1).click();
+  await page.getByRole("option", { name: "C1 Concurrent Simple" }).click();
+  await page.getByRole("checkbox", { name: "Pune Branch" }).check();
+  await page
+    .getByRole("button", { name: "move selected right" })
+    .first()
+    .click();
+  await page.getByRole("checkbox", { name: "C1_CCSA_BA1" }).check();
+  await page.getByRole("checkbox", { name: "C1_CCSA_BA2" }).check();
+  await page.getByRole("button", { name: "move selected left" }).nth(1).click();
+  await page.getByRole("button", { name: "Map" }).click();
+  // -------------Create Workflow-----------------
+  await page.getByRole("menuitem", { name: "Admin" }).click();
+  await page.getByRole("menuitem", { name: "Workflow", exact: true }).click();
+  await page.getByRole("menuitem", { name: "Create" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.locator("#mui-component-select-auditTypeId").click();
+  await page.getByRole("option", { name: "C1 Concurrent Simple" }).click();
+  await page.getByRole("textbox", { name: "Workflow Name" }).click();
+  await page.getByRole("textbox", { name: "Workflow Name" }).fill("B");
+  await page.getByRole("textbox", { name: "Workflow Name" }).press("CapsLock");
+  await page.getByRole("textbox", { name: "Workflow Name" }).fill("Basic (");
+  await page.getByRole("textbox", { name: "Workflow Name" }).press("CapsLock");
+  await page.getByRole("textbox", { name: "Workflow Name" }).press("CapsLock");
+  await page.getByRole("textbox", { name: "Workflow Name" }).fill("Basic (C1C");
+  await page.getByRole("textbox", { name: "Workflow Name" }).press("CapsLock");
+  await page
+    .getByRole("textbox", { name: "Workflow Name" })
+    .fill("Basic (C1ConcurrentSimpleWF)");
+  await page.getByRole("combobox", { name: "Audit Type", exact: true }).click();
+  await page.getByRole("option", { name: "ACTIVE", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  // -------------Create Workflow Stages-----------------
+  await page.getByRole("menuitem", { name: "Admin" }).click();
+  await page.getByRole("menuitem", { name: "Workflow", exact: true }).click();
+  await page.getByRole("menuitem", { name: "Admin" }).click();
+  await page.getByRole("menuitem", { name: "Workflow Stages" }).click();
+  await page.getByRole("menuitem", { name: "Create" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.getByLabel("", { exact: true }).click();
+  await page.getByRole("option", { name: "C1 Concurrent Simple" }).click();
+  await page.getByRole("textbox", { name: "Workflow Stage Name" }).click();
+  await page
+    .getByRole("textbox", { name: "Workflow Stage Name" })
+    .fill("Audit Planned");
+  await page.getByRole("combobox", { name: "Audit Type", exact: true }).click();
+  await page.getByRole("option", { name: "ACTIVE", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("textbox", { name: "Workflow Stage Name" }).click();
+  await page
+    .getByRole("textbox", { name: "Workflow Stage Name" })
+    .fill("Audit Created");
+  await page.getByRole("combobox", { name: "Audit Type", exact: true }).click();
+  await page.getByRole("option", { name: "ACTIVE", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("textbox", { name: "Workflow Stage Name" }).click();
+  await page
+    .getByRole("textbox", { name: "Workflow Stage Name" })
+    .fill("Document Upload");
+  await page.getByRole("combobox", { name: "Audit Type", exact: true }).click();
+  await page.getByRole("option", { name: "ACTIVE", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("textbox", { name: "Workflow Stage Name" }).click();
+  await page
+    .getByRole("textbox", { name: "Workflow Stage Name" })
+    .fill("Audit In Progress");
+  await page.getByRole("combobox", { name: "Audit Type", exact: true }).click();
+  await page.getByRole("option", { name: "ACTIVE", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("textbox", { name: "Workflow Stage Name" }).click();
+  await page
+    .getByRole("textbox", { name: "Workflow Stage Name" })
+    .fill("Audit Completed");
+  await page.getByRole("combobox", { name: "Audit Type", exact: true }).click();
+  await page.getByRole("option", { name: "ACTIVE", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("textbox", { name: "Workflow Stage Name" }).click();
+  await page
+    .getByRole("textbox", { name: "Workflow Stage Name" })
+    .fill("Compliance In Progress");
+  await page.getByRole("combobox", { name: "Audit Type", exact: true }).click();
+  await page.getByRole("option", { name: "ACTIVE", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("textbox", { name: "Workflow Stage Name" }).click();
+  await page
+    .getByRole("textbox", { name: "Workflow Stage Name" })
+    .fill("Compliance Verification");
+  await page.getByRole("combobox", { name: "Audit Type", exact: true }).click();
+  await page.getByRole("option", { name: "ACTIVE", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("textbox", { name: "Workflow Stage Name" }).click();
+  await page
+    .getByRole("textbox", { name: "Workflow Stage Name" })
+    .fill("Audit Closed");
+  await page.getByRole("combobox", { name: "Audit Type", exact: true }).click();
+  await page.getByRole("option", { name: "ACTIVE", exact: true }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  // -------------Assign Workflow-----------------
+  await page.getByRole("link", { name: "Assign Sequence to Workflow" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.getByRole("combobox", { name: "Stage Workflow" }).click();
+  await page
+    .getByRole("option", { name: "Basic (C1ConcurrentSimpleWF)" })
+    .click();
+  await page
+    .getByRole("option", { name: "Basic (C1ConcurrentSimpleWF)" })
+    .click();
+  await page.getByRole("option", { name: "Audit Planned" }).click();
+  await page.getByRole("spinbutton", { name: "Workflow Stage Number" }).click();
+  await page
+    .getByRole("spinbutton", { name: "Workflow Stage Number" })
+    .fill("1");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Select Workflow Stage" }).click();
+  await page.getByRole("option", { name: "Audit Created" }).click();
+  await page.getByRole("spinbutton", { name: "Workflow Stage Number" }).click();
+  await page
+    .getByRole("spinbutton", { name: "Workflow Stage Number" })
+    .fill("2");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Select Workflow Stage" }).click();
+  await page.getByRole("option", { name: "Document Upload" }).click();
+  await page.getByRole("spinbutton", { name: "Workflow Stage Number" }).click();
+  await page
+    .getByRole("spinbutton", { name: "Workflow Stage Number" })
+    .fill("3");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Select Workflow Stage" }).click();
+  await page.getByRole("option", { name: "Audit In Progress" }).click();
+  await page.getByRole("spinbutton", { name: "Workflow Stage Number" }).click();
+  await page
+    .getByRole("spinbutton", { name: "Workflow Stage Number" })
+    .fill("4");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Select Workflow Stage" }).click();
+  await page.getByRole("option", { name: "Audit Completed" }).click();
+  await page.getByRole("spinbutton", { name: "Workflow Stage Number" }).click();
+  await page
+    .getByRole("spinbutton", { name: "Workflow Stage Number" })
+    .fill("5");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Select Workflow Stage" }).click();
+  await page.getByRole("option", { name: "Compliance In Progress" }).click();
+  await page.getByRole("spinbutton", { name: "Workflow Stage Number" }).click();
+  await page
+    .getByRole("spinbutton", { name: "Workflow Stage Number" })
+    .fill("6");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Select Workflow Stage" }).click();
+  await page.getByRole("option", { name: "Compliance Verification" }).click();
+  await page.getByRole("spinbutton", { name: "Workflow Stage Number" }).click();
+  await page
+    .getByRole("spinbutton", { name: "Workflow Stage Number" })
+    .fill("7");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Select Workflow Stage" }).click();
+  await page.getByRole("option", { name: "Audit Closed" }).click();
+  await page.getByRole("spinbutton", { name: "Workflow Stage Number" }).click();
+  await page
+    .getByRole("spinbutton", { name: "Workflow Stage Number" })
+    .fill("8");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByText("Note: After assigning").click();
+  // -------------Manage Workflow Access-----------------
+  await page.getByRole("link", { name: "Manage Workflow Access" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.getByRole("combobox", { name: "Audit Type" }).click();
+  await page.getByRole("option", { name: "C1 Concurrent Simple" }).click();
+  await page.getByRole("combobox", { name: "Role" }).click();
+  await page.getByRole("option", { name: "C1Auditor" }).click();
+  await page
+    .locator("tr:nth-child(4) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(5) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page.locator("body").press("ScrollLock");
+  await page
+    .locator("tr:nth-child(7) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(8) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(4) > td:nth-child(14) > .MuiSvgIcon-root > path")
+    .click();
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Role C1Auditor" }).click();
+  await page.getByRole("option", { name: "C1Auditee" }).click();
+  await page
+    .locator("tr:nth-child(2) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(2) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(6) > td:nth-child(6) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(2) > td:nth-child(2) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(2) > .MuiSvgIcon-root")
+    .click();
+  await page.locator("body").press("ScrollLock");
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(6) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(6) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Role C1Auditee" }).click();
+  await page.getByRole("option", { name: "C1Auditor" }).click();
+  await page
+    .locator("tr:nth-child(2) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(5) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(7) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page.locator("body").press("ScrollLock");
+  await page
+    .locator("tr:nth-child(8) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Role C1Auditor" }).click();
+  await page.getByRole("option", { name: "C1OrgAdmin" }).click();
+  await page.getByTestId("CheckBoxOutlineBlankIcon").first().click();
+  await page
+    .locator("tr:nth-child(2) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(5) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(4) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(6) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(7) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(8) > td:nth-child(3) > .MuiSvgIcon-root")
+    .click();
+  await page.getByTestId("CheckBoxOutlineBlankIcon").nth(2).click();
+  await page
+    .locator("tr:nth-child(2) > td:nth-child(6) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(6) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(4) > td:nth-child(6) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(5) > td:nth-child(6) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(6) > td:nth-child(6) > .MuiSvgIcon-root > path")
+    .click();
+  await page
+    .locator("tr:nth-child(6) > td:nth-child(6) > .MuiSvgIcon-root")
+    .click();
+  await page.getByTestId("CheckBoxOutlineBlankIcon").nth(4).click();
+  await page
+    .locator("tr:nth-child(2) > td:nth-child(9) > .MuiSvgIcon-root > path")
+    .click();
+  await page
+    .locator("tr:nth-child(5) > td:nth-child(9) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(6) > td:nth-child(9) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(7) > td:nth-child(9) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(8) > td:nth-child(9) > .MuiSvgIcon-root")
+    .click();
+  await page.locator("td:nth-child(12) > .MuiSvgIcon-root").first().click();
+  await page
+    .locator("tr:nth-child(2) > td:nth-child(12) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(12) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(4) > td:nth-child(12) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(5) > td:nth-child(12) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(6) > td:nth-child(12) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(7) > td:nth-child(12) > .MuiSvgIcon-root > path")
+    .click();
+  await page.locator("td:nth-child(14) > .MuiSvgIcon-root").first().click();
+  await page
+    .locator("tr:nth-child(2) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(4) > td:nth-child(14) > .MuiSvgIcon-root > path")
+    .click();
+  await page
+    .locator("tr:nth-child(8) > td:nth-child(14) > .MuiSvgIcon-root")
+    .click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("combobox", { name: "Role C1OrgAdmin" }).click();
+  await page.getByRole("option", { name: "C1Auditee" }).click();
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(9) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(3) > td:nth-child(12) > .MuiSvgIcon-root")
+    .click();
+  await page
+    .locator("tr:nth-child(6) > td:nth-child(9) > .MuiSvgIcon-root > path")
+    .click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  // -------------Define Workflow-----------------
+  await page.getByRole("link", { name: "Define Workflow" }).click();
+  await page.getByRole("combobox", { name: "Organization" }).click();
+  await page.getByRole("option", { name: "Company1" }).click();
+  await page.getByRole("combobox", { name: "Audit Type" }).click();
+  await page.getByRole("option", { name: "C1 Concurrent Simple" }).click();
+  await page.getByRole("combobox", { name: "Workflow Stages" }).first().click();
+  await page.getByRole("option", { name: "Audit In Progress" }).click();
+  await page
+    .getByRole("checkbox", { name: "Set Audit Actual Start Date" })
+    .check();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.locator("form").getByText("Audit In Progress").click();
+  await page.getByRole("option", { name: "Audit Completed" }).click();
+  await page
+    .getByRole("checkbox", { name: "Generate Audit Complete Report" })
+    .check();
+  await page
+    .getByRole("checkbox", { name: "Set Audit Actual Finish Date" })
+    .check();
+  await page.getByRole("checkbox", { name: "Generate Score" }).check();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.getByRole("checkbox", { name: "Set Udin No" }).check();
+  await page.getByRole("checkbox", { name: "Set Udin No" }).press("ScrollLock");
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.locator("form").getByText("Audit Completed").click();
+  await page.getByRole("option", { name: "Audit Closed" }).click();
+  await page.getByRole("checkbox", { name: "Set Audit Closed Date" }).check();
+  await page
+    .getByRole("checkbox", { name: "Generate Audit Closed Report" })
+    .check();
+  await page.getByRole("button", { name: "Submit" }).click();
+  await page.locator("form").getByText("Audit Closed", { exact: true }).click();
+  await page.getByRole("option", { name: "Compliance Verification" }).click();
+  await page.getByRole("combobox", { name: "Select Fields" }).click();
+  await page.getByRole("option", { name: "Control Effectiveness" }).click();
+  await page.getByRole("button", { name: "Submit" }).click();
+  // -------------Create Audit-----------------
+  await page.getByRole("menuitem", { name: "Audit" }).click();
+  await page.getByRole("menuitem", { name: "Audit Annual Plan" }).click();
+  await page.getByRole("combobox", { name: "Audit Type" }).click();
+  await page.getByRole("option", { name: "C1 Concurrent Simple" }).click();
+  await page.getByRole("combobox", { name: "Frequency" }).click();
+  await page.getByRole("option", { name: "By Audit Type" }).click();
+  await page.getByRole("combobox", { name: "Audit Plan for" }).click();
+  await page.getByRole("option", { name: "Calendar Year" }).click();
+  await page.getByRole("button", { name: "Generate", exact: true }).click();
+  await page.getByRole("combobox", { name: "Months of 2025" }).click();
+  await page.getByRole("option", { name: "Jan" }).click();
+  await page.getByRole("button", { name: "Generate Schedule" }).click();
+  await page.getByRole("button", { name: "Initiate Audit" }).click();
+  await page.getByLabel("", { exact: true }).click();
+  await page.getByRole("option", { name: "Audit Created" }).click();
+  await page.getByRole("textbox", { name: "Audit Name" }).click();
+  await page
+    .getByRole("textbox", { name: "Audit Name" })
+    .fill("C1 Concurrent Simple JAN 2025");
+  await page
+    .getByRole("textbox", { name: "Planned Start Date" })
+    .fill("2025-01-02");
+  await page
+    .getByRole("textbox", { name: "Planned Finish Date" })
+    .fill("2025-01-02");
+  await page.getByRole("textbox", { name: "Planned Start Time" }).click();
+  await page.getByRole("textbox", { name: "Planned Start Time" }).fill("10:00");
+  await page.getByRole("textbox", { name: "Planned Finish Time" }).click();
+  await page
+    .getByRole("textbox", { name: "Planned Finish Time" })
+    .fill("17:00");
+  await page
+    .getByRole("textbox", { name: "Audit Period From" })
+    .fill("2024-12-01");
+  await page
+    .getByRole("textbox", { name: "Audit Period To" })
+    .fill("2024-12-31");
+  await page.getByRole("textbox", { name: "Audit Scope" }).click();
+  await page.getByRole("textbox", { name: "Audit Scope" }).fill("Scope");
+  await page.getByRole("textbox", { name: "Audit Objective" }).click();
+  await page
+    .getByRole("textbox", { name: "Audit Objective" })
+    .fill("Objective");
+  await page.getByRole("button", { name: "Add Users +" }).click();
+  await page.getByRole("button", { name: "Add Users +" }).click();
+  await page.getByRole("button", { name: "Add Users +" }).click();
+  await page.getByRole("button", { name: "Add Users +" }).click();
+  await page.getByRole("button", { name: "Add Users +" }).click();
+  await page.getByRole("button", { name: "Remove" }).nth(4).click();
+  await page.getByRole("button", { name: "Remove" }).nth(2).click();
+  await page.getByRole("combobox", { name: "Select User" }).first().click();
+  await page.getByRole("option", { name: "c1companyadmin-C1OrgAdmin" }).click();
+  await page.getByRole("combobox", { name: "Select User" }).nth(1).click();
+  await page
+    .getByRole("option", { name: "c1companyauditee-C1Auditee" })
+    .click();
+  await page.getByRole("combobox", { name: "Select User" }).nth(2).click();
+  await page
+    .getByRole("option", { name: "c1companyauditor-C1Auditor" })
+    .click();
+  await page
+    .getByRole("combobox", { name: "Assign Audit Level Role" })
+    .first()
+    .click();
+  await page.getByRole("checkbox").uncheck();
+  await page.getByText("C1OrgAdmin", { exact: true }).click();
+  await page
+    .getByRole("combobox", { name: "Assign Audit Level Role" })
+    .nth(1)
+    .click();
+  await page.getByRole("checkbox").uncheck();
+  await page.getByText("C1Auditee", { exact: true }).click();
+  await page
+    .getByRole("combobox", { name: "Assign Audit Level Role" })
+    .nth(2)
+    .click();
+  await page.getByRole("checkbox").uncheck();
+  await page.locator("#menu-").getByText("default").click();
+  await page.getByRole("checkbox", { name: "Is Lead Auditor?" }).check();
+  await page.getByRole("button", { name: "Create" }).click();
+  await page.getByRole("menuitem", { name: "Audit" }).click();
+  await page.getByRole("menuitem", { name: "List View" }).click();
 });
